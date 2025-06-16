@@ -1,12 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import Header from '../components/Header';
+import VideoHero from '../components/VideoHero';
+import CategorySection from '../components/CategorySection';
+import FeaturesSection from '../components/FeaturesSection';
+import Footer from '../components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    // Add loading animation class to body
+    document.body.classList.add('animate-fade-in');
+    
+    return () => {
+      document.body.classList.remove('animate-fade-in');
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <Header />
+      <VideoHero />
+      <CategorySection />
+      <FeaturesSection />
+      <Footer />
     </div>
   );
 };
