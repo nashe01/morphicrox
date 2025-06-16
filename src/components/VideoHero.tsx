@@ -50,8 +50,53 @@ const VideoHero = () => {
         </div>
       </div>
 
+      {/* Category Navigation - Bottom Section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="grid grid-cols-4 h-32">
+          {/* For Bathrooms */}
+          <a href="/bathrooms" className="group relative overflow-hidden bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 flex items-end p-6">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="relative z-10 text-white">
+              <p className="text-sm font-light mb-1">For</p>
+              <h3 className="text-xl font-bold text-amber-400">Bathrooms</h3>
+              <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
+
+          {/* For Kitchens */}
+          <a href="/kitchens" className="group relative overflow-hidden bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 flex items-end p-6">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="relative z-10 text-white">
+              <p className="text-sm font-light mb-1">For</p>
+              <h3 className="text-xl font-bold text-amber-400">Kitchens</h3>
+              <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
+
+          {/* For Hospitality */}
+          <a href="/hospitality" className="group relative overflow-hidden bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 flex items-end p-6">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="relative z-10 text-white">
+              <p className="text-sm font-light mb-1">For</p>
+              <h3 className="text-xl font-bold text-amber-400">Hospitality</h3>
+              <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
+
+          {/* For Office */}
+          <a href="/office" className="group relative overflow-hidden bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 flex items-end p-6">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="relative z-10 text-white">
+              <p className="text-sm font-light mb-1">For</p>
+              <h3 className="text-xl font-bold text-amber-400">Office</h3>
+              <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </a>
+        </div>
+      </div>
+
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
         </div>

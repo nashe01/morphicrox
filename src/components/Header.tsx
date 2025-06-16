@@ -22,23 +22,17 @@ const Header = () => {
               <a href="/" className="text-amber-600 font-medium hover:text-amber-700 transition-colors">
                 HOME
               </a>
-              <a href="/bathrooms" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
-                BATHROOMS
+              <a href="#" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+                PRODUCTS
               </a>
-              <a href="/kitchens" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
-                KITCHENS
-              </a>
-              <a href="/office" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
-                OFFICE
-              </a>
-              <a href="/hospitality" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
-                HOSPITALITY
+              <a href="#" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+                BLOG
               </a>
               <a href="/about" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
                 ABOUT US
               </a>
               <a href="/contact" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
-                CONTACT
+                CONTACT US
               </a>
             </nav>
 
