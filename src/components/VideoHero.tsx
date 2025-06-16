@@ -15,13 +15,13 @@ const VideoHero = () => {
           className="w-full h-full object-cover"
         >
           <source
-            src="https://player.vimeo.com/external/434045526.sd.mp4?s=c27eecc69fab9f11bcf5c834c7d2c81c3e8e0e4d&profile_id=164&oauth2_token_id=1747418641"
+            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             type="video/mp4"
           />
           {/* Fallback image */}
           <img
-            src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1920&q=80"
-            alt="Modern bathroom"
+            src="https://images.unsplash.com/photo-1584622662821-6d4c7ea37027?auto=format&fit=crop&w=1920&q=80"
+            alt="Modern ceramic bathroom fittings"
             className="w-full h-full object-cover"
           />
         </video>
@@ -35,12 +35,12 @@ const VideoHero = () => {
         <div className="max-w-7xl mx-auto px-6 text-white">
           <div className="max-w-2xl animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-light mb-6 leading-tight">
-              Luxury
-              <span className="block font-bold">Bathroom</span>
+              Engineered
+              <span className="block font-bold">Perfection</span>
               <span className="block text-amber-400">Solutions</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed">
-              Transform your space with premium bathroom furniture and ceramics crafted for modern living
+              Transform your spaces with premium ceramic solutions crafted for bathrooms, kitchens, offices, and hospitality
             </p>
             <button className="group bg-white text-gray-900 px-8 py-4 rounded-none hover:bg-amber-50 transition-all duration-300 flex items-center space-x-2 font-medium">
               <span>Explore Collections</span>
