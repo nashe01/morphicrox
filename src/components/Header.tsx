@@ -19,19 +19,19 @@ const Header = () => {
           {/* Navigation - pushed to far right */}
           <div className="flex items-center space-x-8">
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-amber-600 font-medium hover:text-amber-700 transition-colors">
+              <a href="/" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 HOME
               </a>
-              <a href="#" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              <a href="#" className="text-black hover:text-brand transition-colors font-medium">
                 PRODUCTS
               </a>
-              <a href="#" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              <a href="#" className="text-black hover:text-brand transition-colors font-medium">
                 BLOG
               </a>
-              <a href="/about" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              <a href="/about" className="text-black hover:text-brand transition-colors font-medium">
                 ABOUT US
               </a>
-              <a href="/contact" className="text-gray-700 hover:text-amber-600 transition-colors font-medium">
+              <a href="/contact" className="text-black hover:text-brand transition-colors font-medium">
                 CONTACT US
               </a>
             </nav>
@@ -39,11 +39,11 @@ const Header = () => {
             {/* Actions */}
             <div className="flex items-center space-x-4">
               <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <Search className="w-5 h-5 text-gray-600" />
+                <Search className="w-5 h-5 text-black" />
               </button>
               <button className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <ShoppingBag className="w-5 h-5 text-gray-600" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-amber-600 text-white text-xs rounded-full flex items-center justify-center">
+                <ShoppingBag className="w-5 h-5 text-black" />
+                <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand text-white text-xs rounded-full flex items-center justify-center">
                   0
                 </span>
               </button>

@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,23 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				brand: {
+					DEFAULT: 'rgb(220, 140, 52)',
+					50: 'rgba(220, 140, 52, 0.05)',
+					100: 'rgba(220, 140, 52, 0.1)',
+					200: 'rgba(220, 140, 52, 0.2)',
+					300: 'rgba(220, 140, 52, 0.3)',
+					400: 'rgba(220, 140, 52, 0.4)',
+					500: 'rgb(220, 140, 52)',
+					600: 'rgba(220, 140, 52, 0.8)',
+					700: 'rgba(220, 140, 52, 0.9)',
+					800: 'rgba(220, 140, 52, 0.95)',
+					900: 'rgba(220, 140, 52, 1)'
 				}
+			},
+			fontFamily: {
+				'pin-sans': ['Pin Sans', 'Inter', 'sans-serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

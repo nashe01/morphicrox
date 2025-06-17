@@ -15,7 +15,7 @@ const VideoHero = () => {
           className="w-full h-full object-cover"
         >
           <source
-            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            src="https://s.pinimg.com/webapp/Pin-Sans-MacOS-Regular-708c49dd.woff2"
             type="video/mp4"
           />
           {/* Fallback image */}
@@ -34,15 +34,15 @@ const VideoHero = () => {
       <div className="relative z-10 h-full flex items-center">
         <div className="max-w-7xl mx-auto px-6 text-white">
           <div className="max-w-2xl animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-light mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-light mb-6 leading-tight font-pin-sans">
               Engineered
               <span className="block font-bold">Perfection</span>
-              <span className="block text-amber-400">Solutions</span>
+              <span className="block text-brand">Solutions</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200 font-light leading-relaxed">
               Transform your spaces with premium ceramic solutions crafted for bathrooms, kitchens, offices, and hospitality
             </p>
-            <button className="group bg-white text-gray-900 px-8 py-4 rounded-none hover:bg-amber-50 transition-all duration-300 flex items-center space-x-2 font-medium">
+            <button className="group bg-white text-black px-8 py-4 rounded-none hover:bg-brand hover:text-white transition-all duration-300 flex items-center space-x-2 font-medium">
               <span>Explore Collections</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -58,7 +58,7 @@ const VideoHero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="relative z-10 text-white">
               <p className="text-sm font-light mb-1">For</p>
-              <h3 className="text-xl font-bold text-amber-400">Bathrooms</h3>
+              <h3 className="text-xl font-bold text-brand">Bathrooms</h3>
               <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
             </div>
           </a>
@@ -68,7 +68,7 @@ const VideoHero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="relative z-10 text-white">
               <p className="text-sm font-light mb-1">For</p>
-              <h3 className="text-xl font-bold text-amber-400">Kitchens</h3>
+              <h3 className="text-xl font-bold text-brand">Kitchens</h3>
               <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
             </div>
           </a>
@@ -78,7 +78,7 @@ const VideoHero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="relative z-10 text-white">
               <p className="text-sm font-light mb-1">For</p>
-              <h3 className="text-xl font-bold text-amber-400">Hospitality</h3>
+              <h3 className="text-xl font-bold text-brand">Hospitality</h3>
               <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
             </div>
           </a>
@@ -88,7 +88,7 @@ const VideoHero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="relative z-10 text-white">
               <p className="text-sm font-light mb-1">For</p>
-              <h3 className="text-xl font-bold text-amber-400">Office</h3>
+              <h3 className="text-xl font-bold text-brand">Office</h3>
               <ArrowRight className="w-4 h-4 mt-2 group-hover:translate-x-1 transition-transform" />
             </div>
           </a>
