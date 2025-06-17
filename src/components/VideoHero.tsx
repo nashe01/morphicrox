@@ -1,37 +1,14 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const VideoHero = () => {
   return (
     <section className="relative h-[70vh] overflow-hidden">
-      {/* Video Background */}
+      {/* Static Image Background */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source
-            src="https://s.pinimg.com/webapp/Pin-Sans-MacOS-Regular-708c49dd.woff2"
-            type="video/mp4"
-          />
-          {/* Fallback image */}
-          <img
-            src="/lovable-uploads/aa70e3f3-87b5-47e3-add9-56b3854b6698.png"
-            alt="Modern ceramic bathroom fittings"
-            className="w-full h-full object-cover"
-          />
-        </video>
-      </div>
-
-      {/* Kitchen Image Overlay */}
-      <div className="absolute top-4 right-4 w-80 h-60 rounded-lg overflow-hidden shadow-lg border-4 border-white">
         <img
           src="/lovable-uploads/aa70e3f3-87b5-47e3-add9-56b3854b6698.png"
-          alt="Modern kitchen design"
+          alt="Modern ceramic fittings"
           className="w-full h-full object-cover"
         />
       </div>
@@ -51,10 +28,6 @@ const VideoHero = () => {
             <p className="text-lg md:text-xl mb-6 text-gray-200 font-light leading-relaxed">
               Transform your spaces with premium ceramic solutions crafted for bathrooms, kitchens, offices, and hospitality
             </p>
-            <button className="group bg-white text-black px-6 py-3 rounded-none hover:bg-brand hover:text-white transition-all duration-300 flex items-center space-x-2 font-medium text-sm">
-              <span>Explore Collections</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
           </div>
         </div>
       </div>
