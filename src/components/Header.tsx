@@ -110,7 +110,7 @@ const Header = () => {
               <a href="/about" className="text-black hover:text-brand transition-colors font-medium">
                 ABOUT
               </a>
-              <a href="/contact" className="text-black hover:text-brand transition-colors font-medium bg-brand text-white px-4 py-2 rounded-md">
+              <a href="/contact" className="text-black hover:text-brand transition-colors font-medium bg-brandg px-4 py-2 rounded-md">
                 CONTACT
               </a>
             </nav>
