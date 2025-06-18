@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Search, ShoppingBag, ChevronDown } from 'lucide-react';
+import { Search, ShoppingBag } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -30,7 +29,7 @@ const Header = () => {
               <a href="/" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 HOME
               </a>
-              
+
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
@@ -38,79 +37,36 @@ const Header = () => {
                       PRODUCTS
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="grid gap-3 p-6 w-[400px] bg-white border shadow-lg">
-                        <NavigationMenuLink asChild>
-                          <a
-                            href="/products/showers"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
-                          >
-                            <div className="text-sm font-medium leading-none">SHOWERS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
-                              Premium shower solutions for modern bathrooms
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                        
-                        <NavigationMenuLink asChild>
-                          <a
-                            href="/products/bathtub-shower-combos"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
-                          >
-                            <div className="text-sm font-medium leading-none">BATHTUB/SHOWER COMBOS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
-                              Complete bathtub and shower combination units
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                        
-                        <NavigationMenuLink asChild>
-                          <a
-                            href="/products/bathtubs"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
-                          >
-                            <div className="text-sm font-medium leading-none">BATHTUBS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
-                              Luxurious bathtubs for relaxation and comfort
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                        
-                        <NavigationMenuLink asChild>
-                          <a
-                            href="/products/countertops"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
-                          >
-                            <div className="text-sm font-medium leading-none">COUNTERTOPS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
-                              Durable ceramic countertops for kitchens and baths
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
-                        
-                        <NavigationMenuLink asChild>
-                          <a
-                            href="/products/sinks"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
-                          >
-                            <div className="text-sm font-medium leading-none">SINKS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
-                              Elegant ceramic sinks for every space
-                            </p>
-                          </a>
-                        </NavigationMenuLink>
+                      <div className="grid grid-cols-1 gap-1 py-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
+                        {[
+                          { label: "SHOWERS", href: "/products/showers" },
+                          { label: "BATHTUB/SHOWER COMBOS", href: "/products/bathtub-shower-combos" },
+                          { label: "BATHTUBS", href: "/products/bathtubs" },
+                          { label: "COUNTERTOPS", href: "/products/countertops" },
+                          { label: "SINKS", href: "/products/sinks" },
+                        ].map((item) => (
+                          <NavigationMenuLink asChild key={item.href}>
+                            <a
+                              href={item.href}
+                              className="block px-4 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100 hover:text-brand transition-colors"
+                            >
+                              {item.label}
+                            </a>
+                          </NavigationMenuLink>
+                        ))}
                       </div>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
-              
+
               <a href="/laminate" className="text-black hover:text-brand transition-colors font-medium">
                 LAMINATE
               </a>
               <a href="/about" className="text-black hover:text-brand transition-colors font-medium">
                 ABOUT
               </a>
-              <a href="/contact" className="text-black hover:text-brand transition-colors font-medium bg-brandg px-4 py-2 rounded-md">
+              <a href="/contact" className="text-black hover:text-white bg-brand px-4 py-2 rounded-md transition-colors font-medium">
                 CONTACT
               </a>
             </nav>
