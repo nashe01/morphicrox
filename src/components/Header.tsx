@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Search, ShoppingBag, ChevronDown } from 'lucide-react';
-import MobileNav from './MobileNav';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -25,9 +24,9 @@ const Header = () => {
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <nav className="flex items-center space-x-8">
+          {/* Navigation - pushed to far right */}
+          <div className="flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-8">
               <a href="/" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 HOME
               </a>
@@ -35,18 +34,18 @@ const Header = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-black hover:text-brand transition-colors font-medium bg-transparent data-[state=open]:bg-transparent data-[active]:bg-transparent">
+                    <NavigationMenuTrigger className="text-black hover:text-brand transition-colors font-medium bg-transparent">
                       PRODUCTS
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="grid gap-1 p-4 w-[500px] bg-white border shadow-xl rounded-lg">
+                      <div className="grid gap-3 p-6 w-[400px] bg-white border shadow-lg">
                         <NavigationMenuLink asChild>
                           <a
                             href="/products/showers"
-                            className="group block select-none space-y-1 rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-brand/5 hover:shadow-md focus:bg-brand/5 focus:shadow-md border border-transparent hover:border-brand/20"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
                           >
-                            <div className="text-sm font-semibold leading-none text-black group-hover:text-brand transition-colors">SHOWERS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-500 mt-2">
+                            <div className="text-sm font-medium leading-none">SHOWERS</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                               Premium shower solutions for modern bathrooms
                             </p>
                           </a>
@@ -55,10 +54,10 @@ const Header = () => {
                         <NavigationMenuLink asChild>
                           <a
                             href="/products/bathtub-shower-combos"
-                            className="group block select-none space-y-1 rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-brand/5 hover:shadow-md focus:bg-brand/5 focus:shadow-md border border-transparent hover:border-brand/20"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
                           >
-                            <div className="text-sm font-semibold leading-none text-black group-hover:text-brand transition-colors">BATHTUB/SHOWER COMBOS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-500 mt-2">
+                            <div className="text-sm font-medium leading-none">BATHTUB/SHOWER COMBOS</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                               Complete bathtub and shower combination units
                             </p>
                           </a>
@@ -67,10 +66,10 @@ const Header = () => {
                         <NavigationMenuLink asChild>
                           <a
                             href="/products/bathtubs"
-                            className="group block select-none space-y-1 rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-brand/5 hover:shadow-md focus:bg-brand/5 focus:shadow-md border border-transparent hover:border-brand/20"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
                           >
-                            <div className="text-sm font-semibold leading-none text-black group-hover:text-brand transition-colors">BATHTUBS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-500 mt-2">
+                            <div className="text-sm font-medium leading-none">BATHTUBS</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                               Luxurious bathtubs for relaxation and comfort
                             </p>
                           </a>
@@ -79,10 +78,10 @@ const Header = () => {
                         <NavigationMenuLink asChild>
                           <a
                             href="/products/countertops"
-                            className="group block select-none space-y-1 rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-brand/5 hover:shadow-md focus:bg-brand/5 focus:shadow-md border border-transparent hover:border-brand/20"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
                           >
-                            <div className="text-sm font-semibold leading-none text-black group-hover:text-brand transition-colors">COUNTERTOPS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-500 mt-2">
+                            <div className="text-sm font-medium leading-none">COUNTERTOPS</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                               Durable ceramic countertops for kitchens and baths
                             </p>
                           </a>
@@ -91,10 +90,10 @@ const Header = () => {
                         <NavigationMenuLink asChild>
                           <a
                             href="/products/sinks"
-                            className="group block select-none space-y-1 rounded-lg p-4 leading-none no-underline outline-none transition-all hover:bg-brand/5 hover:shadow-md focus:bg-brand/5 focus:shadow-md border border-transparent hover:border-brand/20"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-brand focus:bg-gray-100 focus:text-brand"
                           >
-                            <div className="text-sm font-semibold leading-none text-black group-hover:text-brand transition-colors">SINKS</div>
-                            <p className="line-clamp-2 text-sm leading-snug text-gray-500 mt-2">
+                            <div className="text-sm font-medium leading-none">SINKS</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-gray-600">
                               Elegant ceramic sinks for every space
                             </p>
                           </a>
@@ -128,20 +127,6 @@ const Header = () => {
                 </span>
               </button>
             </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          <div className="flex md:hidden items-center space-x-4">
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <Search className="w-5 h-5 text-black" />
-            </button>
-            <button className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ShoppingBag className="w-5 h-5 text-black" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand text-white text-xs rounded-full flex items-center justify-center">
-                0
-              </span>
-            </button>
-            <MobileNav />
           </div>
         </div>
       </div>
