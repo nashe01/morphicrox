@@ -1,5 +1,5 @@
-import React from 'react';
-import { Search, ShoppingBag } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, ShoppingBag, Menu } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/navigation-menu";
 
 const Header = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 py-4">
@@ -23,9 +25,9 @@ const Header = () => {
             />
           </div>
 
-          {/* Navigation - pushed to far right */}
-          <div className="flex items-center space-x-8">
-            <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <nav className="flex items-center space-x-8">
               <a href="/" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 HOME
               </a>
@@ -33,7 +35,7 @@ const Header = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-black hover:text-brand transition-colors font-medium bg-transparent">
+                    <NavigationMenuTrigger className="text-brand font-medium hover:text-brand-600 bg-transparent">
                       PRODUCTS
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -60,34 +62,82 @@ const Header = () => {
                 </NavigationMenuList>
               </NavigationMenu>
 
-              <a href="/laminate" className="text-black hover:text-brand transition-colors font-medium">
+              <a href="/laminate" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 LAMINATE
               </a>
-              <a href="/about" className="text-black hover:text-brand transition-colors font-medium">
+              <a href="/about" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 ABOUT
               </a>
-              <a href="/contact" className="text-black hover:text-white bg-brand px-4 py-2 rounded-md transition-colors font-medium">
+              <a href="/contact" className="text-brand font-medium hover:text-brand-600 transition-colors">
                 CONTACT
               </a>
             </nav>
+          </div>
 
-            {/* Actions */}
-            <div className="flex items-center space-x-4">
-              <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <Search className="w-5 h-5 text-black" />
-              </button>
-              <button className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
-                <ShoppingBag className="w-5 h-5 text-black" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand text-white text-xs rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </button>
-            </div>
+          {/* Mobile Hamburger */}
+          <div className="md:hidden flex items-center space-x-4">
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <Menu className="w-6 h-6 text-black" />
+            </button>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center space-x-4">
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <Search className="w-5 h-5 text-black" />
+            </button>
+            <button className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
+              <ShoppingBag className="w-5 h-5 text-black" />
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand text-white text-xs rounded-full flex items-center justify-center">
+                0
+              </span>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {mobileOpen && (
+          <nav className="md:hidden mt-4 space-y-2">
+            <a href="/" className="block text-brand font-medium hover:text-brand-600 transition-colors">
+              HOME
+            </a>
+            <details className="group">
+              <summary className="cursor-pointer text-brand font-medium hover:text-brand-600">
+                PRODUCTS
+              </summary>
+              <div className="ml-4 mt-2 space-y-1">
+                {[
+                  { label: "SHOWERS", href: "/products/showers" },
+                  { label: "BATHTUB/SHOWER COMBOS", href: "/products/bathtub-shower-combos" },
+                  { label: "BATHTUBS", href: "/products/bathtubs" },
+                  { label: "COUNTERTOPS", href: "/products/countertops" },
+                  { label: "SINKS", href: "/products/sinks" },
+                ].map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="block text-sm text-gray-700 hover:text-brand transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </details>
+            <a href="/laminate" className="block text-brand font-medium hover:text-brand-600 transition-colors">
+              LAMINATE
+            </a>
+            <a href="/about" className="block text-brand font-medium hover:text-brand-600 transition-colors">
+              ABOUT
+            </a>
+            <a href="/contact" className="block text-brand font-medium hover:text-brand-600 transition-colors">
+              CONTACT
+            </a>
+          </nav>
+        )}
       </div>
     </header>
   );
 };
 
 export default Header;
+
