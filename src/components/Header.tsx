@@ -25,83 +25,85 @@ const Header = () => {
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <nav className="flex items-center space-x-8">
-              <a href="/" className="text-brand font-medium hover:text-brand-600 transition-colors">
-                HOME
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {[
+              { label: 'HOME', href: '/' },
+              { label: 'LAMINATE', href: '/laminate' },
+              { label: 'ABOUT', href: '/about' },
+              { label: 'CONTACT', href: '/contact' },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-black font-medium hover:text-brand transition-colors px-3 py-2"
+              >
+                {item.label}
               </a>
+            ))}
 
-              {/* Mega Menu for PRODUCTS */}
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-black hover:text-brand transition-colors font-medium bg-transparent px-4 py-2 rounded-full hover:bg-gray-100 data-[state=open]:bg-black data-[state=open]:text-white">
-                      PRODUCTS
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="flex gap-10 py-6 px-8 w-[800px] bg-white border border-gray-200 rounded-md shadow-lg">
-                        {/* Left Links */}
-                        <div className="min-w-[160px] space-y-2">
-                          <h3 className="font-semibold text-black">All Products</h3>
-                          <ul className="space-y-1 text-sm text-gray-700">
-                            {[
-                              { label: "Showers", href: "/products/showers" },
-                              { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos" },
-                              { label: "Bathtubs", href: "/products/bathtubs" },
-                              { label: "Countertops", href: "/products/countertops" },
-                              { label: "Sinks", href: "/products/sinks" },
-                            ].map((item) => (
-                              <li key={item.href}>
-                                <a href={item.href} className="hover:text-brand transition-colors">
-                                  {item.label}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Right Image Previews */}
-                        <div className="grid grid-cols-3 gap-4">
+            {/* PRODUCTS Dropdown */}
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-black font-medium px-4 py-2 rounded-full hover:bg-gray-100 data-[state=open]:bg-black data-[state=open]:text-white transition-all">
+                    PRODUCTS
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="flex w-[900px] p-6 bg-white border border-gray-200 rounded-lg shadow-xl space-x-10">
+                      {/* Left Links */}
+                      <div className="w-1/4">
+                        <h4 className="font-semibold mb-4 text-black">All Products</h4>
+                        <ul className="space-y-2 text-gray-700 text-sm">
                           {[
-                            "/images/showers.jpg",
-                            "/images/sinks.jpg",
-                            "/images/countertops.jpg",
-                          ].map((src, idx) => (
-                            <img
-                              key={idx}
-                              src={src}
-                              alt="Product Preview"
-                              className="w-full h-32 object-cover rounded-md hover:scale-105 transition-transform"
-                            />
+                            { label: "Showers", href: "/products/showers" },
+                            { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos" },
+                            { label: "Bathtubs", href: "/products/bathtubs" },
+                            { label: "Countertops", href: "/products/countertops" },
+                            { label: "Sinks", href: "/products/sinks" },
+                          ].map((item) => (
+                            <li key={item.href}>
+                              <a
+                                href={item.href}
+                                className="hover:text-brand transition-colors"
+                              >
+                                {item.label}
+                              </a>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
 
-              <a href="/laminate" className="text-brand font-medium hover:text-brand-600 transition-colors">
-                LAMINATE
-              </a>
-              <a href="/about" className="text-brand font-medium hover:text-brand-600 transition-colors">
-                ABOUT
-              </a>
-              <a href="/contact" className="text-brand font-medium hover:text-brand-600 transition-colors">
-                CONTACT
-              </a>
-            </nav>
-          </div>
+                      {/* Right Images */}
+                      <div className="w-3/4 grid grid-cols-3 gap-4">
+                        {[
+                          { src: "/images/showers.jpg", alt: "Showers" },
+                          { src: "/images/sinks.jpg", alt: "Sinks" },
+                          { src: "/images/countertops.jpg", alt: "Countertops" },
+                        ].map(({ src, alt }, idx) => (
+                          <img
+                            key={idx}
+                            src={src}
+                            alt={alt}
+                            className="rounded-lg object-cover h-36 w-full hover:scale-105 transition-transform"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </nav>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile menu toggle */}
           <div className="md:hidden flex items-center space-x-4">
             <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <Menu className="w-6 h-6 text-black" />
             </button>
           </div>
 
-          {/* Actions */}
+          {/* Cart & Search */}
           <div className="flex items-center space-x-4">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
               <Search className="w-5 h-5 text-black" />
@@ -115,43 +117,24 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile Nav */}
         {mobileOpen && (
           <nav className="md:hidden mt-4 space-y-2">
-            <a href="/" className="block text-brand font-medium hover:text-brand-600 transition-colors">
-              HOME
-            </a>
-            <details className="group">
-              <summary className="cursor-pointer text-brand font-medium hover:text-brand-600">
-                PRODUCTS
-              </summary>
-              <div className="ml-4 mt-2 space-y-1">
-                {[
-                  { label: "Showers", href: "/products/showers" },
-                  { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos" },
-                  { label: "Bathtubs", href: "/products/bathtubs" },
-                  { label: "Countertops", href: "/products/countertops" },
-                  { label: "Sinks", href: "/products/sinks" },
-                ].map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="block text-sm text-gray-700 hover:text-brand transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </details>
-            <a href="/laminate" className="block text-brand font-medium hover:text-brand-600 transition-colors">
-              LAMINATE
-            </a>
-            <a href="/about" className="block text-brand font-medium hover:text-brand-600 transition-colors">
-              ABOUT
-            </a>
-            <a href="/contact" className="block text-brand font-medium hover:text-brand-600 transition-colors">
-              CONTACT
-            </a>
+            {[
+              { label: 'HOME', href: '/' },
+              { label: 'PRODUCTS', href: '#' },
+              { label: 'LAMINATE', href: '/laminate' },
+              { label: 'ABOUT', href: '/about' },
+              { label: 'CONTACT', href: '/contact' },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block text-black font-medium hover:text-brand transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
         )}
       </div>
