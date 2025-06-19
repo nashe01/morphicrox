@@ -32,30 +32,50 @@ const Header = () => {
                 HOME
               </a>
 
+              {/* Mega Menu for PRODUCTS */}
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-brand font-medium hover:text-brand-600 bg-transparent">
+                    <NavigationMenuTrigger className="text-black hover:text-brand transition-colors font-medium bg-transparent px-4 py-2 rounded-full hover:bg-gray-100 data-[state=open]:bg-black data-[state=open]:text-white">
                       PRODUCTS
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="grid grid-cols-1 gap-1 py-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
-                        {[
-                          { label: "SHOWERS", href: "/products/showers" },
-                          { label: "BATHTUB/SHOWER COMBOS", href: "/products/bathtub-shower-combos" },
-                          { label: "BATHTUBS", href: "/products/bathtubs" },
-                          { label: "COUNTERTOPS", href: "/products/countertops" },
-                          { label: "SINKS", href: "/products/sinks" },
-                        ].map((item) => (
-                          <NavigationMenuLink asChild key={item.href}>
-                            <a
-                              href={item.href}
-                              className="block px-4 py-2 text-sm font-medium text-gray-700 rounded hover:bg-gray-100 hover:text-brand transition-colors"
-                            >
-                              {item.label}
-                            </a>
-                          </NavigationMenuLink>
-                        ))}
+                      <div className="flex gap-10 py-6 px-8 w-[800px] bg-white border border-gray-200 rounded-md shadow-lg">
+                        {/* Left Links */}
+                        <div className="min-w-[160px] space-y-2">
+                          <h3 className="font-semibold text-black">All Products</h3>
+                          <ul className="space-y-1 text-sm text-gray-700">
+                            {[
+                              { label: "Showers", href: "/products/showers" },
+                              { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos" },
+                              { label: "Bathtubs", href: "/products/bathtubs" },
+                              { label: "Countertops", href: "/products/countertops" },
+                              { label: "Sinks", href: "/products/sinks" },
+                            ].map((item) => (
+                              <li key={item.href}>
+                                <a href={item.href} className="hover:text-brand transition-colors">
+                                  {item.label}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {/* Right Image Previews */}
+                        <div className="grid grid-cols-3 gap-4">
+                          {[
+                            "/images/showers.jpg",
+                            "/images/sinks.jpg",
+                            "/images/countertops.jpg",
+                          ].map((src, idx) => (
+                            <img
+                              key={idx}
+                              src={src}
+                              alt="Product Preview"
+                              className="w-full h-32 object-cover rounded-md hover:scale-105 transition-transform"
+                            />
+                          ))}
+                        </div>
                       </div>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -107,11 +127,11 @@ const Header = () => {
               </summary>
               <div className="ml-4 mt-2 space-y-1">
                 {[
-                  { label: "SHOWERS", href: "/products/showers" },
-                  { label: "BATHTUB/SHOWER COMBOS", href: "/products/bathtub-shower-combos" },
-                  { label: "BATHTUBS", href: "/products/bathtubs" },
-                  { label: "COUNTERTOPS", href: "/products/countertops" },
-                  { label: "SINKS", href: "/products/sinks" },
+                  { label: "Showers", href: "/products/showers" },
+                  { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos" },
+                  { label: "Bathtubs", href: "/products/bathtubs" },
+                  { label: "Countertops", href: "/products/countertops" },
+                  { label: "Sinks", href: "/products/sinks" },
                 ].map((item) => (
                   <a
                     key={item.href}
@@ -140,4 +160,5 @@ const Header = () => {
 };
 
 export default Header;
+
 
