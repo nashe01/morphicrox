@@ -1,0 +1,28 @@
+/* ------------------------------------------------------------------
+   Oval “notch” that appears on hover / active nav link
+   ------------------------------------------------------------------ */
+@layer utilities {
+  /* Base style: invisible oval just under the header’s bottom edge */
+  .nav-notch::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;             /* half‑outside header for cut‑out effect */
+    transform: translateX(-50%);
+    width: 4.5rem;             /* notch width  */
+    height: 1.75rem;           /* notch height */
+    background: #DC8C34;       /* brand colour */
+    border-radius: 9999px;     /* full oval */
+    opacity: 0;                /* hidden until hover / open */
+    transition: opacity 0.25s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Show + subtle lift on hover OR when Radix trigger is open */
+  .group:hover .nav-notch::after,
+  .group[data-state="open"] .nav-notch::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(2px);
+  }
+}
