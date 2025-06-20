@@ -9,27 +9,7 @@ const Laminate = () => {
   const [activeCabinetTab, setActiveCabinetTab] = useState('cabinets');
 
   const laminateProducts = [
-    {
-      id: 1,
-      name: "Wood-Look Laminate",
-      description: "Realistic wood grain patterns with ceramic durability",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
-      price: "$45/sq ft"
-    },
-    {
-      id: 2,
-      name: "Stone-Look Laminate",
-      description: "Natural stone appearance with easy maintenance",
-      image: "https://images.unsplash.com/photo-1584622781867-4d8147619355?auto=format&fit=crop&w=800&q=80",
-      price: "$52/sq ft"
-    },
-    {
-      id: 3,
-      name: "Abstract Pattern Laminate",
-      description: "Modern abstract designs for contemporary spaces",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-      price: "$38/sq ft"
-    }
+    
   ];
 
   const countertopColours = [
