@@ -27,7 +27,12 @@ const VideoHero = () => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section className="relative h-[90vh] overflow-hidden" id="hero-section">
+    <motion.section
+      className="relative h-[90vh] overflow-hidden"
+      id="hero-section"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0, transition: { duration: 0.8, ease: easeOut } }}
+    >
       {/* Background */}
       <div className="absolute inset-0">
         <img
@@ -91,8 +96,9 @@ const VideoHero = () => {
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 export default VideoHero;
+
