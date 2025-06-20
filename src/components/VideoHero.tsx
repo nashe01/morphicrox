@@ -10,17 +10,17 @@ const categories = [
   { label: "Office", href: "/office" },
 ];
 
-// Fade‑up for category cards (unchanged)
+/* Fade‑up that fires for every card at once */
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.2, duration: 0.6, ease: easeOut },
-  }),
+    transition: { duration: 0.6, ease: easeOut },
+  },
 };
 
-// Fade‑up for the whole hero section
+/* In‑view animation for the whole hero section */
 const heroFadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -31,13 +31,13 @@ const heroFadeUp = {
 };
 
 const VideoHero = () => {
-  // Trigger for the whole section
+  /* Trigger for the whole section */
   const { ref: heroRef, inView: heroInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
-  // Trigger for the category cards (as before)
+  /* Trigger for the category cards row */
   const { ref: cardsRef, inView: cardsInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -80,9 +80,12 @@ const VideoHero = () => {
       </div>
 
       {/* Category Cards */}
-      <div className="absolute bottom-0 left-0 right-0 z-10" ref={cardsRef}>
-        <div className="grid grid-cols-4 h-40">
-          {categories.map((cat, i) => (
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10"
+        ref={cardsRef}
+      >
+        <div className="grid grid-cols-4 h-40 divide-x divide-white/25 border-x border-white/25">
+          {categories.map((cat) => (
             <motion.a
               key={cat.label}
               href={cat.href}
@@ -90,7 +93,6 @@ const VideoHero = () => {
               variants={fadeUp}
               initial="hidden"
               animate={cardsInView ? "visible" : "hidden"}
-              custom={i}
               whileHover={{ scale: 1.05, rotateX: -2, rotateY: 2 }}
               style={{
                 perspective: "600px",
