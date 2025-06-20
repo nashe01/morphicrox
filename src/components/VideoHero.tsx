@@ -10,28 +10,47 @@ const categories = [
   { label: "Office", href: "/office" },
 ];
 
+// Fade‑up for category cards (unchanged)
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      ease: easeOut,
-    },
+    transition: { delay: i * 0.2, duration: 0.6, ease: easeOut },
   }),
 };
 
+// Fade‑up for the whole hero section
+const heroFadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: easeOut },
+  },
+};
+
 const VideoHero = () => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+  // Trigger for the whole section
+  const { ref: heroRef, inView: heroInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  // Trigger for the category cards (as before)
+  const { ref: cardsRef, inView: cardsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
 
   return (
     <motion.section
+      ref={heroRef}
       className="relative h-[90vh] overflow-hidden"
       id="hero-section"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0, transition: { duration: 0.8, ease: easeOut } }}
+      variants={heroFadeUp}
+      initial="hidden"
+      animate={heroInView ? "visible" : "hidden"}
     >
       {/* Background */}
       <div className="absolute inset-0">
@@ -61,7 +80,7 @@ const VideoHero = () => {
       </div>
 
       {/* Category Cards */}
-      <div className="absolute bottom-0 left-0 right-0 z-10" ref={ref}>
+      <div className="absolute bottom-0 left-0 right-0 z-10" ref={cardsRef}>
         <div className="grid grid-cols-4 h-40">
           {categories.map((cat, i) => (
             <motion.a
@@ -70,7 +89,7 @@ const VideoHero = () => {
               className="group relative overflow-hidden backdrop-blur-sm flex items-end p-8 pb-12 bg-white/10 hover:bg-white/20 transition-all duration-300"
               variants={fadeUp}
               initial="hidden"
-              animate={inView ? "visible" : "hidden"}
+              animate={cardsInView ? "visible" : "hidden"}
               custom={i}
               whileHover={{ scale: 1.05, rotateX: -2, rotateY: 2 }}
               style={{
@@ -101,5 +120,6 @@ const VideoHero = () => {
 };
 
 export default VideoHero;
+
 
 
