@@ -19,16 +19,16 @@ const Index = () => {
       
       if (heroSection && mainContent) {
         const heroHeight = heroSection.offsetHeight;
-        const maxScroll = heroHeight * 0.8; // Start curtain effect earlier
+        const maxScroll = heroHeight * 0.6; // Reduce overlap for better content visibility
         
         // Calculate how much to move main content up
-        const curtainOffset = Math.min(scrolled * 1.2, maxScroll);
+        const curtainOffset = Math.min(scrolled * 0.8, maxScroll);
         
         // Move main content up to create curtain effect
         mainContent.style.transform = `translateY(-${curtainOffset}px)`;
         
         // Optional: Add slight parallax to hero for depth
-        heroSection.style.transform = `translateY(-${scrolled * 0.3}px)`;
+        heroSection.style.transform = `translateY(-${scrolled * 0.2}px)`;
       }
     };
 
@@ -44,7 +44,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <VideoHero />
-      <div id="main-content" className="relative bg-white z-30 mt-[-10vh]">
+      <div id="main-content" className="relative bg-white z-30 mt-[-5vh]">
         <CategorySection />
         <FeaturesSection />
         <Footer />

@@ -13,11 +13,11 @@ import {
    Data: product categories + preview images
    ----------------------------------------------------------- */
 const categories = [
-  { label: "Showers", href: "/products/showers", image: "/images/showers.jpg" },
-  { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos", image: "/images/combos.jpg" },
-  { label: "Bathtubs", href: "/products/bathtubs", image: "/images/bathtubs.jpg" },
-  { label: "Countertops", href: "/products/countertops", image: "/images/countertops.jpg" },
-  { label: "Sinks", href: "/products/sinks", image: "/images/sinks.jpg" },
+  { label: "Showers", href: "/products/showers", image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&h=300&fit=crop" },
+  { label: "Bathtub/Shower Combos", href: "/products/bathtub-shower-combos", image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop" },
+  { label: "Bathtubs", href: "/products/bathtubs", image: "https://images.unsplash.com/photo-1560185007-5f0bb1866cab?w=400&h=300&fit=crop" },
+  { label: "Countertops", href: "/products/countertops", image: "https://images.unsplash.com/photo-1556912167-f556f1bb6da8?w=400&h=300&fit=crop" },
+  { label: "Sinks", href: "/products/sinks", image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&h=300&fit=crop" },
 ];
 
 const Header = () => {

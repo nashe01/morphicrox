@@ -18,7 +18,7 @@ const VideoHero = () => {
       <div className="absolute inset-0 bg-black/30" />
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
+      <div className="relative z-10 h-full flex items-center pb-32">
         <div className="max-w-7xl mx-auto px-6 text-white">
           <div className="max-w-2xl animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-light mb-6 leading-tight font-pin-sans">
