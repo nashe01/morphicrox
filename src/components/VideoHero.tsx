@@ -10,7 +10,7 @@ const categories = [
   { label: "Office", href: "/office" },
 ];
 
-/* Whole‑section animation (fires once when 20 % visible) */
+/* 1️⃣  Hero section: 0 → 1 opacity, 50 → 0 px slide‑up over 0.8 s */
 const heroFadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -20,18 +20,18 @@ const heroFadeUp = {
   },
 };
 
-/* Cards fade‑up together, delayed so hero finishes first */
+/* 2️⃣  Cards: stay invisible, then begin at t = 0.9 s and fade for 1 s */
 const fadeUpCards = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { delay: 0.9, duration: 0.6, ease: easeOut },
+    transition: { delay: 0.9, duration: 1, ease: easeOut },
   },
 };
 
 const VideoHero = () => {
-  /* One in‑view trigger for the entire hero */
+  /* One in‑view trigger for everything */
   const { ref: heroRef, inView: heroInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -75,6 +75,7 @@ const VideoHero = () => {
 
       {/* Category Cards */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
+        {/* no gap; crisp inner/outer edges */}
         <div className="grid grid-cols-4 h-36 divide-x divide-white/25 border-x border-white/25">
           {categories.map((cat) => (
             <motion.a
