@@ -1,8 +1,9 @@
+
 /* ------------------------------------------------------------------
-   Oval “notch” that appears on hover / active nav link
+   Oval "notch" that appears on hover / active nav link
    ------------------------------------------------------------------ */
 @layer utilities {
-  /* Base style: invisible oval just under the header’s bottom edge */
+  /* Base style: invisible oval just under the header's bottom edge */
   .nav-notch::after {
     content: "";
     position: absolute;
@@ -11,7 +12,7 @@
     transform: translateX(-50%);
     width: 4.5rem;             /* notch width  */
     height: 1.75rem;           /* notch height */
-    background: #DC8C34;       /* brand colour */
+    background: rgb(255, 102, 0);       /* orange brand colour */
     border-radius: 9999px;     /* full oval */
     opacity: 0;                /* hidden until hover / open */
     transition: opacity 0.25s ease, transform 0.3s ease;

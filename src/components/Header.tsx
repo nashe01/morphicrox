@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Search, ShoppingBag, Menu } from "lucide-react";
 import {
@@ -39,7 +40,7 @@ const Header = () => {
             {/* HOME */}
             <a
               href="/"
-              className="text-[#DC8C34] font-medium px-3 py-2 transition-all hover:underline underline-offset-8"
+              className="text-brand font-medium px-3 py-2 transition-all hover:underline underline-offset-8"
             >
               HOME
             </a>
@@ -49,7 +50,7 @@ const Header = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    className="text-[#DC8C34] font-medium px-3 py-2 bg-transparent transition-all hover:underline underline-offset-8"
+                    className="text-brand font-medium px-3 py-2 bg-transparent transition-all hover:underline underline-offset-8"
                   >
                     PRODUCTS
                   </NavigationMenuTrigger>
@@ -64,7 +65,7 @@ const Header = () => {
                               href={c.href}
                               onMouseEnter={() => setPreviewSrc(c.image)}
                               onFocus={() => setPreviewSrc(c.image)}
-                              className="block text-gray-700 hover:text-[#DC8C34] transition-colors duration-200"
+                              className="block text-gray-700 hover:text-brand transition-colors duration-200"
                             >
                               {c.label}
                             </a>
@@ -96,7 +97,7 @@ const Header = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[#DC8C34] font-medium px-3 py-2 transition-all hover:underline underline-offset-8"
+                className="text-brand font-medium px-3 py-2 transition-all hover:underline underline-offset-8"
               >
                 {item.label}
               </a>
@@ -119,7 +120,7 @@ const Header = () => {
             </button>
             <button className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
               <ShoppingBag className="w-5 h-5" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#DC8C34] text-white text-[10px] rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand text-white text-[10px] rounded-full flex items-center justify-center">
                 0
               </span>
             </button>
@@ -129,20 +130,20 @@ const Header = () => {
         {/* Mobile Navigation */}
         {mobileOpen && (
           <nav className="md:hidden mt-4 space-y-2">
-            <a href="/" className="block text-[#DC8C34] font-medium">HOME</a>
+            <a href="/" className="block text-brand font-medium">HOME</a>
             <details className="group">
-              <summary className="cursor-pointer text-[#DC8C34] font-medium">PRODUCTS</summary>
+              <summary className="cursor-pointer text-brand font-medium">PRODUCTS</summary>
               <div className="ml-4 mt-2 space-y-1">
                 {categories.map((c) => (
-                  <a key={c.href} href={c.href} className="block text-sm text-gray-700 hover:text-[#DC8C34]">
+                  <a key={c.href} href={c.href} className="block text-sm text-gray-700 hover:text-brand">
                     {c.label}
                   </a>
                 ))}
               </div>
             </details>
-            <a href="/laminate" className="block text-[#DC8C34] font-medium">LAMINATE</a>
-            <a href="/about" className="block text-[#DC8C34] font-medium">ABOUT</a>
-            <a href="/contact" className="block text-[#DC8C34] font-medium">CONTACT</a>
+            <a href="/laminate" className="block text-brand font-medium">LAMINATE</a>
+            <a href="/about" className="block text-brand font-medium">ABOUT</a>
+            <a href="/contact" className="block text-brand font-medium">CONTACT</a>
           </nav>
         )}
       </div>
@@ -151,4 +152,3 @@ const Header = () => {
 };
 
 export default Header;
-
