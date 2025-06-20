@@ -8,6 +8,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
+
 /* -----------------------------------------------------------
    Data: product categories + preview images
    ----------------------------------------------------------- */
