@@ -11,22 +11,24 @@ const Index = () => {
     // Add loading animation class to body
     document.body.classList.add('animate-fade-in');
     
-    // Curtain scroll effect
+    // Enhanced curtain scroll effect
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const heroSection = document.getElementById('hero-section');
       const mainContent = document.getElementById('main-content');
       
       if (heroSection && mainContent) {
-        // Apply transform to create curtain effect
         const heroHeight = heroSection.offsetHeight;
-        const translateY = Math.min(scrolled * 0.5, heroHeight);
+        const maxScroll = heroHeight * 0.8; // Start curtain effect earlier
         
-        // Move hero up slower than scroll (parallax effect)
-        heroSection.style.transform = `translateY(-${translateY}px)`;
+        // Calculate how much to move main content up
+        const curtainOffset = Math.min(scrolled * 1.2, maxScroll);
         
-        // Move main content to create curtain effect
-        mainContent.style.transform = `translateY(-${Math.max(0, scrolled - heroHeight)}px)`;
+        // Move main content up to create curtain effect
+        mainContent.style.transform = `translateY(-${curtainOffset}px)`;
+        
+        // Optional: Add slight parallax to hero for depth
+        heroSection.style.transform = `translateY(-${scrolled * 0.3}px)`;
       }
     };
 
@@ -42,7 +44,7 @@ const Index = () => {
     <div className="min-h-screen">
       <Header />
       <VideoHero />
-      <div id="main-content" className="relative bg-white z-20">
+      <div id="main-content" className="relative bg-white z-30 mt-[-10vh]">
         <CategorySection />
         <FeaturesSection />
         <Footer />

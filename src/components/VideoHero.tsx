@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 
 const VideoHero = () => {
   return (
-    <section className="relative h-screen overflow-hidden" id="hero-section">
+    <section className="relative h-[90vh] overflow-hidden" id="hero-section">
       {/* Static Image Background */}
       <div className="absolute inset-0">
         <img
