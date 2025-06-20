@@ -10,17 +10,7 @@ const categories = [
   { label: "Office", href: "/office" },
 ];
 
-/* Fade‑up that fires for every card at once */
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: easeOut },
-  },
-};
-
-/* In‑view animation for the whole hero section */
+/* Whole‑section animation (fires once when 20 % visible) */
 const heroFadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -30,15 +20,19 @@ const heroFadeUp = {
   },
 };
 
-const VideoHero = () => {
-  /* Trigger for the whole section */
-  const { ref: heroRef, inView: heroInView } = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
+/* Cards fade‑up together, delayed so hero finishes first */
+const fadeUpCards = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.9, duration: 0.6, ease: easeOut },
+  },
+};
 
-  /* Trigger for the category cards row */
-  const { ref: cardsRef, inView: cardsInView } = useInView({
+const VideoHero = () => {
+  /* One in‑view trigger for the entire hero */
+  const { ref: heroRef, inView: heroInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
@@ -80,20 +74,17 @@ const VideoHero = () => {
       </div>
 
       {/* Category Cards */}
-      <div
-        className="absolute bottom-0 left-0 right-0 z-10"
-        ref={cardsRef}
-      >
-        <div className="grid grid-cols-4 h-40 divide-x divide-white/25 border-x border-white/25">
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="grid grid-cols-4 h-36 divide-x divide-white/25 border-x border-white/25">
           {categories.map((cat) => (
             <motion.a
               key={cat.label}
               href={cat.href}
-              className="group relative overflow-hidden backdrop-blur-sm flex items-end p-8 pb-12 bg-white/10 hover:bg-white/20 transition-all duration-300"
-              variants={fadeUp}
+              className="group relative overflow-hidden backdrop-blur-sm flex items-end p-6 pb-10 bg-white/10 hover:bg-white/20 transition-all duration-300"
+              variants={fadeUpCards}
               initial="hidden"
-              animate={cardsInView ? "visible" : "hidden"}
-              whileHover={{ scale: 1.05, rotateX: -2, rotateY: 2 }}
+              animate={heroInView ? "visible" : "hidden"}
+              whileHover={{ y: -4, rotateX: -2, rotateY: 2 }}
               style={{
                 perspective: "600px",
                 transformStyle: "preserve-3d",
@@ -122,6 +113,3 @@ const VideoHero = () => {
 };
 
 export default VideoHero;
-
-
-
