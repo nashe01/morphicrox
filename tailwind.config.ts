@@ -16,19 +16,42 @@ export default {
       screens: { "2xl": "1400px" },
     },
     extend: {
+      /* -------------- COLORS (unchanged) -------------- */
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
-        secondary: { DEFAULT: "hsl(var(--secondary))", foreground: "hsl(var(--secondary-foreground))" },
-        destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))" },
-        muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted-foreground))" },
-        accent: { DEFAULT: "hsl(var(--accent))", foreground: "hsl(var(--accent-foreground))" },
-        popover: { DEFAULT: "hsl(var(--popover))", foreground: "hsl(var(--popover-foreground))" },
-        card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
+
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -53,6 +76,8 @@ export default {
           900: "rgba(204, 85, 0, 1)",
         },
       },
+
+      /* -------------- TYPOGRAPHY & RADII -------------- */
       fontFamily: {
         "pin-sans": ["Pin Sans", "Inter", "sans-serif"],
       },
@@ -61,8 +86,10 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
+      /* -------------- KEYFRAMES -------------- */
       keyframes: {
-        /* Existing accordion animations */
+        /* Accordion (existing) */
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -71,17 +98,28 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        /* 🔥 NEW slide‑in animation for dropdown image */
+
+        /* Dropdown‑image slide‑in (existing) */
         slidein: {
           "0%": { opacity: "0", transform: "translateY(2rem)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+
+        /* 🔥 NEW – fade‑in‑up for category cards */
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
+
+      /* -------------- ANIMATIONS -------------- */
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        /* 🔥 NEW */
         slidein: "slidein 0.4s ease-out forwards",
+
+        /* 🔥 NEW */
+        "fade-in-up": "fade-in-up 0.7s ease-out forwards",
       },
     },
   },
