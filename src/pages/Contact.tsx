@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -21,8 +22,8 @@ const Contact = () => {
                   <Phone className="w-6 h-6 text-brand" />
                   <div>
                     <p className="font-semibold text-black">Phone</p>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-gray-600">+1 (555) 765-4321</p>
+                    <p className="text-gray-600">+263 79 123 4567</p>
+                    <p className="text-gray-600">+263 77 765 4321</p>
                   </div>
                 </div>
                 
@@ -39,8 +40,8 @@ const Contact = () => {
                   <MapPin className="w-6 h-6 text-brand" />
                   <div>
                     <p className="font-semibold text-black">Address</p>
-                    <p className="text-gray-600">123 Design Street</p>
-                    <p className="text-gray-600">New York, NY 10001</p>
+                    <p className="text-gray-600">Coventry Road</p>
+                    <p className="text-gray-600">Marondera, Zimbabwe</p>
                   </div>
                 </div>
 
@@ -160,7 +161,7 @@ const Contact = () => {
               </div>
               <div className="h-96 bg-gray-200 rounded-lg flex items-center justify-center">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2412648750455!2d-73.98823492404069!3d40.74844097138558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1704067200000!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3299.123!2d31.5483036!3d-18.1859235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931ff4ff7bdc56b%3A0xcfa225363726f2b9!2sCoventry%20Rd%2C%20Marondera!5e0!3m2!1sen!2szw!4v1704067200000!5m2!1sen!2szw"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

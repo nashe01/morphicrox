@@ -1,9 +1,38 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const About = () => {
+  useEffect(() => {
+    // Add curtain scroll effect similar to home page
+    const handleScroll = () => {
+      const scrolled = window.pageYOffset;
+      const heroSection = document.getElementById('about-hero-section');
+      const mainContent = document.getElementById('about-main-content');
+      
+      if (heroSection && mainContent) {
+        const heroHeight = heroSection.offsetHeight;
+        const maxScroll = heroHeight * 0.5;
+        
+        // Calculate curtain offset
+        const curtainOffset = Math.min(scrolled * 0.7, maxScroll);
+        
+        // Move main content up to create curtain effect
+        mainContent.style.transform = `translateY(-${curtainOffset}px)`;
+        
+        // Add slight parallax to hero
+        heroSection.style.transform = `translateY(-${scrolled * 0.2}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const portfolioItems = [
     {
       id: 1,
@@ -52,28 +81,54 @@ const About = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20">
+      
+      {/* Hero Section */}
+      <section 
+        id="about-hero-section"
+        className="relative h-[80vh] overflow-hidden pt-20"
+      >
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" 
+            alt="About MorphicRox" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/40" />
+        
+        <div className="relative z-10 h-full flex items-center pb-16">
+          <div className="max-w-7xl mx-auto px-6 text-white">
+            <div className="max-w-3xl">
+              <h1 className="text-5xl md:text-7xl font-light mb-6 leading-tight font-pin-sans">
+                About
+                <span className="block font-bold text-brand">MorphicRox</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-200 font-light leading-relaxed">
+                At MorphicRox, we believe in engineered perfection. Our commitment to excellence drives us to create premium ceramic solutions that transform spaces and elevate experiences.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main id="about-main-content" className="relative bg-white z-30 mt-[-10vh]">
         <div className="max-w-7xl mx-auto px-6 py-16">
-          <h1 className="text-4xl md:text-5xl font-light text-black mb-8 font-pin-sans">
-            About <span className="font-bold text-brand">MorphicRox</span>
-          </h1>
-          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div>
               <p className="text-xl text-gray-600 mb-6">
-                At MorphicRox, we believe in engineered perfection. Our commitment to excellence drives us to create premium ceramic solutions that transform spaces and elevate experiences.
-              </p>
-              <p className="text-gray-600 mb-6">
                 With years of expertise in the industry, we specialize in providing high-quality bathroom furniture, kitchen solutions, office installations, and hospitality fixtures that combine functionality with aesthetic appeal.
               </p>
-              <p className="text-gray-600">
+              <p className="text-gray-600 mb-6">
                 Our team of skilled professionals works tirelessly to ensure that every product meets the highest standards of quality and design, delivering solutions that stand the test of time.
+              </p>
+              <p className="text-gray-600">
+                From concept to installation, we work closely with our clients to bring their vision to life with precision and creativity.
               </p>
             </div>
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
-                alt="About MorphicRox" 
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=800&q=80" 
+                alt="Our Workshop" 
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
             </div>
@@ -154,8 +209,8 @@ const About = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </main>
-      <Footer />
     </div>
   );
 };
