@@ -3,15 +3,11 @@ import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-/* ------------------------------------------------------------------ */
-/*  1. Data                                                            */
-/* ------------------------------------------------------------------ */
-
 interface Category {
   title: string;
   description: string;
   image: string;
-  color: string;            // Tailwind gradient colours (start‑to‑end)
+  color: string;
 }
 
 const categories: Category[] = [
@@ -45,11 +41,7 @@ const categories: Category[] = [
   },
 ];
 
-/* ------------------------------------------------------------------ */
-/*  2. Animation variants                                              */
-/* ------------------------------------------------------------------ */
-
-// custom cubic‑bezier – strongly typed via cubicBezier()
+// Custom cubic-bezier easing for smooth animation
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
 const containerVariants: Variants = {
@@ -59,8 +51,8 @@ const containerVariants: Variants = {
     y: 0,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.15,
-      duration: 0.7,
+      staggerChildren: 0.3,  // slower stagger
+      duration: 1.4,         // longer duration for slow fade-in
       ease,
     },
   },
@@ -72,13 +64,9 @@ const cardVariants: Variants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease },
+    transition: { duration: 1, ease },  // slower, smoother animation
   },
 };
-
-/* ------------------------------------------------------------------ */
-/*  3. Component                                                       */
-/* ------------------------------------------------------------------ */
 
 const CategorySection: React.FC = () => (
   <motion.section
@@ -87,10 +75,9 @@ const CategorySection: React.FC = () => (
     variants={containerVariants}
     initial="hidden"
     whileInView="show"
-    viewport={{ once: true, amount: 0.25 }}        // fire only once
+    viewport={{ amount: 0.25 }}
   >
     <div className="max-w-7xl mx-auto px-6">
-      {/* Heading */}
       <motion.div variants={cardVariants} className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
           Our <span className="font-bold">Collections</span>
@@ -101,7 +88,6 @@ const CategorySection: React.FC = () => (
         </p>
       </motion.div>
 
-      {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {categories.map((category) => (
           <motion.div
@@ -109,7 +95,6 @@ const CategorySection: React.FC = () => (
             variants={cardVariants}
             className="group relative overflow-hidden bg-white rounded-sm shadow-lg hover:shadow-2xl transition-all duration-500"
           >
-            {/* Image + overlay */}
             <div className="aspect-[4/5] overflow-hidden">
               <img
                 src={category.image}
@@ -121,19 +106,15 @@ const CategorySection: React.FC = () => (
               />
             </div>
 
-            {/* Hover‑only content */}
             <div className="absolute inset-0 flex flex-col justify-end p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
-              <p className="text-sm mb-4 text-white/90">
-                {category.description}
-              </p>
+              <p className="text-sm mb-4 text-white/90">{category.description}</p>
               <button className="flex items-center space-x-2 text-white hover:text-amber-200 transition-colors">
                 <span>Explore</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Default (non‑hover) content */}
             <div className="p-6 group-hover:opacity-0 transition-opacity duration-500">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 {category.title}
@@ -148,4 +129,5 @@ const CategorySection: React.FC = () => (
 );
 
 export default CategorySection;
+
 

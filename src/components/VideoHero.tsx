@@ -1,7 +1,12 @@
+// src/components/VideoHero.tsx
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
+/* ------------------------------------------------------------------ */
+/*  1. Data                                                            */
+/* ------------------------------------------------------------------ */
 
 const categories = [
   { label: "Bathrooms", href: "/bathrooms" },
@@ -10,7 +15,10 @@ const categories = [
   { label: "Office", href: "/office" },
 ];
 
-/* Hero section fade‑in */
+/* ------------------------------------------------------------------ */
+/*  2. Variants                                                        */
+/* ------------------------------------------------------------------ */
+
 const heroFadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -20,7 +28,6 @@ const heroFadeUp = {
   },
 };
 
-/* Cards fade-in after hero is loaded */
 const fadeUpCards = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -30,22 +37,26 @@ const fadeUpCards = {
   },
 };
 
-const VideoHero = () => {
+/* ------------------------------------------------------------------ */
+/*  3. Component                                                       */
+/* ------------------------------------------------------------------ */
+
+const VideoHero: React.FC = () => {
+  // ⬇️  triggerOnce removed so inView toggles true/false every time
   const { ref: heroRef, inView: heroInView } = useInView({
-    triggerOnce: true,
     threshold: 0.2,
   });
 
   return (
     <motion.section
       ref={heroRef}
-      className="relative h-[90vh] overflow-hidden"
       id="hero-section"
+      className="relative h-[90vh] overflow-hidden"
       variants={heroFadeUp}
       initial="hidden"
       animate={heroInView ? "visible" : "hidden"}
     >
-      {/* Background */}
+      {/* Background image ------------------------------------------------ */}
       <div className="absolute inset-0">
         <img
           src="/lovable-uploads/aa70e3f3-87b5-47e3-add9-56b3854b6698.png"
@@ -55,7 +66,7 @@ const VideoHero = () => {
       </div>
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Hero Text */}
+      {/* Hero text ------------------------------------------------------- */}
       <div className="relative z-10 h-full flex items-center pb-32">
         <div className="max-w-7xl mx-auto px-6 text-white">
           <div className="max-w-2xl animate-fade-in">
@@ -72,7 +83,7 @@ const VideoHero = () => {
         </div>
       </div>
 
-      {/* Category Cards */}
+      {/* Category cards -------------------------------------------------- */}
       <div className="absolute bottom-0 left-0 right-0 z-10 overflow-visible">
         <div className="grid grid-cols-4 h-36 divide-x divide-white/25 border-x border-white/25 relative z-0">
           {categories.map((cat) => (
@@ -91,7 +102,7 @@ const VideoHero = () => {
                 zIndex: 10,
                 transition: { duration: 0.25 },
               }}
-              transition={{ duration: 0.12 }} // zoom-out speed
+              transition={{ duration: 0.12 }}
               style={{
                 perspective: "600px",
                 transformStyle: "preserve-3d",
@@ -109,7 +120,7 @@ const VideoHero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator ------------------------------------------------ */}
       <div className="absolute bottom-48 left-1/2 -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
