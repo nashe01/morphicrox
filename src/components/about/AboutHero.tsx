@@ -1,10 +1,9 @@
-
 import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
 
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
-const sectionVariants: Variants = {
+const heroVariants: Variants = {
   hidden: { opacity: 0, y: 60 },
   show: {
     opacity: 1,
@@ -13,42 +12,48 @@ const sectionVariants: Variants = {
   },
 };
 
-const AboutHero: React.FC = () => {
-  return (
-    <motion.section
-      id="about-hero-section"
-      className="relative h-[80vh] overflow-hidden pt-20"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ amount: 0.3 }}
-    >
-      <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
-          alt="About MorphicRox"
-          className="w-full h-full object-cover"
-        />
-      </div>
+const AboutHero: React.FC = () => (
+  <motion.section
+    id="about-hero-section"
+    className="relative overflow-hidden"
+    variants={heroVariants}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ amount: 0.3 }}
+  >
+    {/* Background Image at Top */}
+    <div className="relative h-[50vh] md:h-[60vh] w-full">
+      <img
+        src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
+        alt="About MorphicRox"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
       <div className="absolute inset-0 bg-black/40" />
+    </div>
 
-      <div className="relative z-10 h-full flex items-center pb-16">
-        <div className="max-w-7xl mx-auto px-6 text-white">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-light mb-6 leading-tight font-pin-sans">
-              About
-              <span className="block font-bold text-brand">MorphicRox</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-200 font-light leading-relaxed">
-              At MorphicRox, we believe in engineered perfection. Our
-              commitment to excellence drives us to create premium ceramic
-              solutions that transform spaces and elevate experiences.
-            </p>
-          </div>
-        </div>
+    {/* Combined Text Section Just Below Image */}
+    <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col md:flex-row gap-12 -mt-10 md:-mt-16 relative z-10">
+      {/* Left: Title */}
+      <header className="md:w-1/2">
+        <h1 className="text-5xl md:text-7xl font-light leading-tight font-pin-sans">
+          About
+          <span className="block">
+            <span className="text-[#DC8C34]">Morphic</span>
+            <span className="text-black">Rox</span>
+          </span>
+        </h1>
+      </header>
+
+      {/* Right: Description */}
+      <div className="md:w-1/2">
+        <p className="text-xl md:text-2xl text-gray-700 font-light leading-relaxed">
+          At MorphicRox, we believe in engineered perfection. Our commitment to
+          excellence drives us to create premium ceramic solutions that transform
+          spaces and elevate experiences.
+        </p>
       </div>
-    </motion.section>
-  );
-};
+    </div>
+  </motion.section>
+);
 
 export default AboutHero;
