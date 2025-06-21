@@ -10,7 +10,7 @@ const categories = [
   { label: "Office", href: "/office" },
 ];
 
-/* 1️⃣  Hero section: 0 → 1 opacity, 50 → 0 px slide‑up over 0.8 s */
+/* Hero section fade‑in */
 const heroFadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -20,7 +20,7 @@ const heroFadeUp = {
   },
 };
 
-/* 2️⃣  Cards: stay invisible, then begin at t = 0.9 s and fade for 1 s */
+/* Cards fade-in after hero is loaded */
 const fadeUpCards = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -31,7 +31,6 @@ const fadeUpCards = {
 };
 
 const VideoHero = () => {
-  /* One in‑view trigger for everything */
   const { ref: heroRef, inView: heroInView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -74,25 +73,32 @@ const VideoHero = () => {
       </div>
 
       {/* Category Cards */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        {/* no gap; crisp inner/outer edges */}
-        <div className="grid grid-cols-4 h-36 divide-x divide-white/25 border-x border-white/25">
+      <div className="absolute bottom-0 left-0 right-0 z-10 overflow-visible">
+        <div className="grid grid-cols-4 h-36 divide-x divide-white/25 border-x border-white/25 relative z-0">
           {categories.map((cat) => (
             <motion.a
               key={cat.label}
               href={cat.href}
-              className="group relative overflow-hidden backdrop-blur-sm flex items-end p-6 pb-10 bg-white/10 hover:bg-white/20 transition-all duration-300"
+              className="group relative overflow-visible backdrop-blur-sm flex items-end p-6 pb-10 bg-white/10 hover:bg-white/20"
               variants={fadeUpCards}
               initial="hidden"
               animate={heroInView ? "visible" : "hidden"}
-              whileHover={{ y: -4, rotateX: -2, rotateY: 2 }}
+              whileHover={{
+                scale: 1.08,
+                y: -4,
+                rotateX: -2,
+                rotateY: 2,
+                zIndex: 10,
+                transition: { duration: 0.25 },
+              }}
+              transition={{ duration: 0.12 }} // zoom-out speed
               style={{
                 perspective: "600px",
                 transformStyle: "preserve-3d",
                 willChange: "transform",
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
               <div className="relative z-10 text-white pointer-events-none">
                 <p className="text-sm font-light mb-1">For</p>
                 <h3 className="text-xl font-bold text-brand">{cat.label}</h3>
