@@ -34,8 +34,8 @@ const AboutHero: React.FC = () => (
     {/* Combined Text Section Just Below Image */}
     <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col md:flex-row gap-12 -mt-10 md:-mt-16 relative z-10">
       {/* Left: Title */}
-      <header className="md:w-1/2">
-        <h1 className="text-5xl md:text-7xl font-light leading-tight font-pin-sans">
+      <header className="md:w-1/2 mt-10"> {/* Increased from mt-4 to mt-10 */}
+        <h1 className="text-3xl md:text-5xl font-light leading-tight font-pin-sans">
           About
           <span className="block">
             <span className="text-[#DC8C34]">Morphic</span>
@@ -45,11 +45,12 @@ const AboutHero: React.FC = () => (
       </header>
 
       {/* Right: Description */}
-      <div className="md:w-1/2">
-        <p className="text-xl md:text-2xl text-gray-700 font-light leading-relaxed">
+      <div className="md:w-1/2 mt-4 md:mt-6">
+        <p className="text-base md:text-lg text-gray-700 font-light leading-relaxed">
           At MorphicRox, we believe in engineered perfection. Our commitment to
           excellence drives us to create premium ceramic solutions that transform
-          spaces and elevate experiences.
+          spaces and elevate experiences. Each design is a reflection of timeless
+          aesthetics combined with durable functionality.
         </p>
       </div>
     </div>
@@ -57,3 +58,5 @@ const AboutHero: React.FC = () => (
 );
 
 export default AboutHero;
+
+
