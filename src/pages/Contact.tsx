@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -59,13 +58,28 @@ const Contact = () => {
               <div className="mt-8">
                 <h3 className="text-xl font-semibold text-black mb-4">Follow Us</h3>
                 <div className="flex space-x-4">
-                  <a href="#" className="p-3 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors">
+                  <a 
+                    href="https://instagram.com/morphicrox" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-3 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors"
+                  >
                     <Instagram className="w-5 h-5" />
                   </a>
-                  <a href="#" className="p-3 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors">
+                  <a 
+                    href="https://linkedin.com/company/morphicrox" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-3 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors"
+                  >
                     <Linkedin className="w-5 h-5" />
                   </a>
-                  <a href="#" className="p-3 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors">
+                  <a 
+                    href="https://youtube.com/@morphicrox" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-3 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors"
+                  >
                     <Youtube className="w-5 h-5" />
                   </a>
                 </div>
@@ -127,7 +141,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Map Section */}
           <div className="bg-gray-50 p-8 rounded-lg">
             <h2 className="text-3xl font-light text-black mb-6">Visit Our Showroom</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
