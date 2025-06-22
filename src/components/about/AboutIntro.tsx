@@ -22,7 +22,7 @@ const scrollVariants: Variants = {
   animate: {
     y: ["100%", "-100%"],
     transition: {
-      duration: 30,      // speed ‑‑ adjust to taste
+      duration: 30,            // speed — adjust to taste
       ease: "linear",
       repeat: Infinity,
     },
@@ -35,43 +35,78 @@ const AboutIntro: React.FC = () => {
       variants={sectionVariants}
       initial="hidden"
       whileInView="show"
-      viewport={{ amount: 0.3, once: true }}  /* run only once */
+      viewport={{ amount: 0.3, once: true }} /* run only once */
       className="space-y-12"
     >
       {/* ---------- Heading ---------- */}
-      <h2 className="text-3xl lg:text-4xl font-bold">
+      <h2 className="text-3xl lg:text-4xl font-bold text-center">
         <span className="text-[#DC8C34]">Know </span>
         <span className="text-black">About Us</span>
       </h2>
 
       {/* ---------- Content Grid ---------- */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Scrolling company history */}
-        <div className="relative h-60 overflow-hidden">
-          <motion.div
-            variants={scrollVariants}
-            animate="animate"
-            className="space-y-6"
-          >
-            <p className="text-xl text-gray-600">
-              With years of expertise in the industry, we specialize in providing
-              high‑quality bathroom furniture, kitchen solutions, office
-              installations, and hospitality fixtures that combine functionality
-              with aesthetic appeal.
-            </p>
-            <p className="text-gray-600">
-              Our team of skilled professionals works tirelessly to ensure that
-              every product meets the highest standards of quality and design,
-              delivering solutions that stand the test of time.
-            </p>
-            <p className="text-gray-600">
-              From concept to installation, we work closely with our clients to
-              bring their vision to life with precision and creativity.
-            </p>
-          </motion.div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        {/* --- Left side: Company history --- */}
+        <div className="flex flex-col space-y-4">
+          {/* Label */}
+          <h3 className="text-lg font-semibold text-[#DC8C34]">
+            Company History
+          </h3>
+
+          {/* Scrolling history container */}
+          <div className="relative h-96 overflow-hidden">
+            <motion.div
+              variants={scrollVariants}
+              animate="animate"
+              className="space-y-6"
+            >
+              {/* 9 equal-sized orange paragraphs (3 original + 6 new) */}
+              <p className="text-lg text-[#DC8C34]">
+                With years of expertise in the industry, we specialize in providing
+                high-quality bathroom furniture, kitchen solutions, office
+                installations, and hospitality fixtures that combine functionality
+                with aesthetic appeal.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                Our team of skilled professionals works tirelessly to ensure that
+                every product meets the highest standards of quality and design,
+                delivering solutions that stand the test of time.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                From concept to installation, we work closely with our clients to
+                bring their vision to life with precision and creativity.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                Over the past decade we have expanded our manufacturing facility
+                three times, adopting cutting-edge CNC technology and sustainable
+                materials.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                In 2020 we launched our bespoke design studio, enabling fully
+                customised solutions for luxury residential projects.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                Strategic partnerships with leading hardware suppliers keep our
+                product lines at the forefront of innovation.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                A dedicated after-sales support team ensures seamless maintenance
+                and long-term customer satisfaction.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                Today, we proudly serve clients across Southern Africa, supplying
+                premium fixtures to hotels, corporate offices, and private homes.
+              </p>
+              <p className="text-lg text-[#DC8C34]">
+                Our commitment to eco-friendly practices guides every decision, from
+                sourcing FSC-certified timber to optimising energy use in our
+                workshops.
+              </p>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Image */}
+        {/* --- Right side: Image --- */}
         <div>
           <img
             src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=800&q=80"
@@ -85,5 +120,6 @@ const AboutIntro: React.FC = () => {
 };
 
 export default AboutIntro;
+
 
 
