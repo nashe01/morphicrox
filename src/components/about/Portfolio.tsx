@@ -3,35 +3,19 @@ import { motion, Variants, cubicBezier } from "framer-motion";
 
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
-/* 1️⃣ Heading: slide-in from left */
 const headingVariants: Variants = {
   hidden: { opacity: 0, x: -80 },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 1.4, ease },
-  },
+  show: { opacity: 1, x: 0, transition: { duration: 1.4, ease } },
 };
 
-/* 2️⃣ Grid container → staggers the cards */
 const gridVariants: Variants = {
   hidden: {},
-  show: {
-    transition: {
-      delayChildren: 0.5,  // wait for heading
-      staggerChildren: 0.25,
-    },
-  },
+  show: { transition: { delayChildren: 0.5, staggerChildren: 0.25 } },
 };
 
-/* 3️⃣ Each card entrance */
-const cardVariants: Variants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.1, ease },
-  },
+  show: { opacity: 1, y: 0, transition: { duration: 1.1, ease } },
 };
 
 const Portfolio: React.FC = () => {
@@ -54,91 +38,87 @@ const Portfolio: React.FC = () => {
         "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
       category: "Residential",
     },
-    {
-      id: 3,
-      title: "Corporate Office Washrooms",
-      description:
-        "High-traffic commercial bathroom installation with durable ceramic solutions",
-      image:
-        "https://images.unsplash.com/photo-1584622662821-6d4c7ea37027?auto=format&fit=crop&w=800&q=80",
-      category: "Commercial",
-    },
-    {
-      id: 4,
-      title: "Spa Retreat Center",
-      description: "Serene spa environment with custom ceramic installations",
-      image:
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
-      category: "Hospitality",
-    },
-    {
-      id: 5,
-      title: "Restaurant Kitchen Design",
-      description:
-        "Commercial kitchen with slip-resistant ceramic flooring and walls",
-      image:
-        "https://images.unsplash.com/photo-1556909114-3934c1000-8a5f?auto=format&fit=crop&w=800&q=80",
-      category: "Commercial",
-    },
-    {
-      id: 6,
-      title: "Residential Master Bath",
-      description:
-        "Elegant master bathroom featuring vessel sinks and ceramic tile work",
-      image:
-        "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80",
-      category: "Residential",
-    },
   ];
 
   return (
     <motion.section
       initial="hidden"
       whileInView="show"
-      viewport={{ amount: 0.3, once: true }} // ← plays just once
+      viewport={{ amount: 0.3, once: true }}
       className="space-y-12"
     >
-      {/* ---------- Animated Heading ---------- */}
+      {/* Section Heading */}
       <motion.h2
         variants={headingVariants}
-        className="text-3xl font-light text-center"
+        className="text-3xl font-light text-center mt-8"
       >
         <span className="text-brand">Our </span>
         <span className="text-black">Work</span>
       </motion.h2>
 
-      {/* ---------- Grid ---------- */}
+      {/* Grid */}
       <motion.div
         variants={gridVariants}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch"
       >
+        {/* Two Image Cards */}
         {portfolioItems.map((item) => (
           <motion.div
             key={item.id}
-            variants={cardVariants}
-            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+            variants={itemVariants}
+            className="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow h-full"
           >
             <img
               src={item.image}
               alt={item.title}
               className="w-full h-64 object-cover"
             />
-            <div className="p-6">
-              <span className="text-sm bg-brand text-white px-3 py-1 rounded-full">
+            <div className="p-6 flex flex-col gap-3">
+              <span className="self-start text-sm bg-brand text-white px-3 py-1 rounded-full">
                 {item.category}
               </span>
-
-              <h3 className="mt-3 text-xl font-semibold text-black">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-gray-600">{item.description}</p>
+              <h3 className="text-xl font-semibold text-black">{item.title}</h3>
+              <p className="text-gray-600">{item.description}</p>
             </div>
           </motion.div>
         ))}
+
+        {/* Text Panel */}
+        <motion.div
+          key="explore-panel"
+          variants={itemVariants}
+          className="flex flex-col h-full text-center px-2 md:px-4 lg:px-6 pt-6 pb-4"
+        >
+          {/* Text Content */}
+          <div className="flex-grow">
+            <h3 className="text-2xl font-semibold text-brand mb-4">Explore</h3>
+            <p className="text-gray-600 mb-4">
+              Discover our full gallery of projects featuring both high-quality
+              images and behind-the-scenes videos that showcase our attention to detail,
+              creativity, and craftsmanship.
+            </p>
+            <p className="text-gray-600 mb-4">
+              Our gallery highlights the materials, techniques,
+              and finishes that define our work.
+            </p>
+            <p className="text-gray-600">
+              See how we bring our clients' visions to life from concept to completion.
+            </p>
+          </div>
+
+          {/* Button with minimal top margin */}
+          <div className="mt-2">
+            <button className="px-6 py-2 rounded-full bg-brand text-white hover:bg-brand/90 transition">
+              Gallery
+            </button>
+          </div>
+        </motion.div>
       </motion.div>
     </motion.section>
   );
 };
 
 export default Portfolio;
+
+
 
