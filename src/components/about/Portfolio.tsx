@@ -1,15 +1,36 @@
-
 import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
 
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 60 },
+/* 1️⃣ Heading: slide-in from left */
+const headingVariants: Variants = {
+  hidden: { opacity: 0, x: -80 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.4, ease },
+  },
+};
+
+/* 2️⃣ Grid container → staggers the cards */
+const gridVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      delayChildren: 0.5,  // wait for heading
+      staggerChildren: 0.25,
+    },
+  },
+};
+
+/* 3️⃣ Each card entrance */
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1.2, ease },
+    transition: { duration: 1.1, ease },
   },
 };
 
@@ -19,7 +40,7 @@ const Portfolio: React.FC = () => {
       id: 1,
       title: "Luxury Hotel Bathroom Suite",
       description:
-        "Complete bathroom renovation for 5‑star hotel with premium ceramic fixtures",
+        "Complete bathroom renovation for 5-star hotel with premium ceramic fixtures",
       image:
         "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
       category: "Hospitality",
@@ -37,7 +58,7 @@ const Portfolio: React.FC = () => {
       id: 3,
       title: "Corporate Office Washrooms",
       description:
-        "High‑traffic commercial bathroom installation with durable ceramic solutions",
+        "High-traffic commercial bathroom installation with durable ceramic solutions",
       image:
         "https://images.unsplash.com/photo-1584622662821-6d4c7ea37027?auto=format&fit=crop&w=800&q=80",
       category: "Commercial",
@@ -54,7 +75,7 @@ const Portfolio: React.FC = () => {
       id: 5,
       title: "Restaurant Kitchen Design",
       description:
-        "Commercial kitchen with slip‑resistant ceramic flooring and walls",
+        "Commercial kitchen with slip-resistant ceramic flooring and walls",
       image:
         "https://images.unsplash.com/photo-1556909114-3934c1000-8a5f?auto=format&fit=crop&w=800&q=80",
       category: "Commercial",
@@ -71,28 +92,30 @@ const Portfolio: React.FC = () => {
   ];
 
   return (
-    <motion.div
-      variants={sectionVariants}
+    <motion.section
       initial="hidden"
       whileInView="show"
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }} // ← plays just once
+      className="space-y-12"
     >
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-light text-black mb-4">
-          Our Portfolio
-        </h2>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Browse through some of our exceptional work. From residential
-          renovations to large‑scale commercial projects, we deliver
-          excellence in every installation.
-        </p>
-      </div>
+      {/* ---------- Animated Heading ---------- */}
+      <motion.h2
+        variants={headingVariants}
+        className="text-3xl font-light text-center"
+      >
+        <span className="text-brand">Our </span>
+        <span className="text-black">Work</span>
+      </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* ---------- Grid ---------- */}
+      <motion.div
+        variants={gridVariants}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
         {portfolioItems.map((item) => (
           <motion.div
             key={item.id}
-            variants={sectionVariants}
+            variants={cardVariants}
             className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
           >
             <img
@@ -101,21 +124,21 @@ const Portfolio: React.FC = () => {
               className="w-full h-64 object-cover"
             />
             <div className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm bg-brand text-white px-3 py-1 rounded-full">
-                  {item.category}
-                </span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-black">
+              <span className="text-sm bg-brand text-white px-3 py-1 rounded-full">
+                {item.category}
+              </span>
+
+              <h3 className="mt-3 text-xl font-semibold text-black">
                 {item.title}
               </h3>
-              <p className="text-gray-600">{item.description}</p>
+              <p className="mt-2 text-gray-600">{item.description}</p>
             </div>
           </motion.div>
         ))}
-      </div>
-    </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };
 
 export default Portfolio;
+
