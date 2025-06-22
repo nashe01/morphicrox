@@ -41,7 +41,7 @@ const AboutIntro: React.FC = () => {
       {/* ---------- Heading ---------- */}
       <h2 className="text-3xl lg:text-4xl font-bold">
         <span className="text-[#DC8C34]">Know </span>
-        <span className="text-black">About&nbsp;Us</span>
+        <span className="text-black">About Us</span>
       </h2>
 
       {/* ---------- Content Grid ---------- */}
