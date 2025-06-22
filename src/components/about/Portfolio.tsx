@@ -1,5 +1,8 @@
+
 import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
+import { useNavigate } from "react-router-dom";
 
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
@@ -19,6 +22,9 @@ const itemVariants: Variants = {
 };
 
 const Portfolio: React.FC = () => {
+  const { getContent } = useContent('about');
+  const navigate = useNavigate();
+
   const portfolioItems = [
     {
       id: 1,
@@ -52,7 +58,9 @@ const Portfolio: React.FC = () => {
         variants={headingVariants}
         className="text-3xl font-light text-center mt-8"
       >
-        <span className="text-brand">Our </span>
+        <span className="text-brand">
+          {getContent('portfolio_title', 'Our ')}
+        </span>
         <span className="text-black">Work</span>
       </motion.h2>
 
@@ -93,9 +101,7 @@ const Portfolio: React.FC = () => {
           <div className="flex-grow">
             <h3 className="text-2xl font-semibold text-brand mb-4">Explore</h3>
             <p className="text-gray-600 mb-4">
-              Discover our full gallery of projects featuring both high-quality
-              images and behind-the-scenes videos that showcase our attention to detail,
-              creativity, and craftsmanship.
+              {getContent('portfolio_explore_text', 'Discover our full gallery of projects featuring both high-quality images and behind-the-scenes videos that showcase our attention to detail, creativity, and craftsmanship.')}
             </p>
             <p className="text-gray-600 mb-4">
               Our gallery highlights the materials, techniques,
@@ -108,7 +114,10 @@ const Portfolio: React.FC = () => {
 
           {/* Button with minimal top margin */}
           <div className="mt-2">
-            <button className="px-6 py-2 rounded-full bg-brand text-white hover:bg-brand/90 transition">
+            <button 
+              onClick={() => navigate('/gallery')}
+              className="px-6 py-2 rounded-full bg-brand text-white hover:bg-brand/90 transition"
+            >
               Gallery
             </button>
           </div>
@@ -119,6 +128,3 @@ const Portfolio: React.FC = () => {
 };
 
 export default Portfolio;
-
-
-

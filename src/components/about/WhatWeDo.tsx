@@ -1,5 +1,7 @@
+
 import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
+import { useContent } from "@/hooks/useContent";
 
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
@@ -35,6 +37,8 @@ const cardVariants: Variants = {
 };
 
 const WhatWeDo: React.FC = () => {
+  const { getContent } = useContent('about');
+
   const services = [
     {
       title: "Design & Consultation",
@@ -71,7 +75,9 @@ const WhatWeDo: React.FC = () => {
         variants={headingVariants}
         className="text-3xl font-light mb-8 text-center"
       >
-        <span className="text-brand">What </span>
+        <span className="text-brand">
+          {getContent('what_we_do_title', 'What ')}
+        </span>
         <span className="text-black">We Do</span>
       </motion.h2>
 

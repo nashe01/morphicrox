@@ -17,6 +17,9 @@ import BathtubShowerCombos from "./pages/products/BathtubShowerCombos";
 import Bathtubs from "./pages/products/Bathtubs";
 import Countertops from "./pages/products/Countertops";
 import Sinks from "./pages/products/Sinks";
+import Auth from "./pages/Auth";
+import Admin from "./pages/Admin";
+import Gallery from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +44,9 @@ const App = () => (
           <Route path="/products/bathtubs" element={<Bathtubs />} />
           <Route path="/products/countertops" element={<Countertops />} />
           <Route path="/products/sinks" element={<Sinks />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/gallery" element={<Gallery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

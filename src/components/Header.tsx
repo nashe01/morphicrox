@@ -1,5 +1,8 @@
+
 import React, { useState } from "react";
-import { Search, ShoppingBag, Menu } from "lucide-react";
+import { Search, ShoppingBag, Menu, User, LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from 'react-router-dom';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,6 +10,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { motion, cubicBezier } from "framer-motion";
 
 /* ─────────────────────────  Animation Variants ───────────────────────── */
@@ -99,6 +108,8 @@ const categories = [
 const Header: React.FC = () => {
   const [previewSrc, setPreviewSrc] = useState(categories[0].image);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, profile, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <motion.header
@@ -114,7 +125,8 @@ const Header: React.FC = () => {
             variants={groupVariants}
             src="/lovable-uploads/9aeca46e-6ec2-4e7f-a3fa-94e925134823.png"
             alt="MorphicRox Logo"
-            className="h-12 w-auto"
+            className="h-12 w-auto cursor-pointer"
+            onClick={() => navigate('/')}
           />
 
           {/* Desktop Navigation */}
@@ -177,6 +189,7 @@ const Header: React.FC = () => {
               { label: "LAMINATE", href: "/laminate" },
               { label: "ABOUT", href: "/about" },
               { label: "CONTACT", href: "/contact" },
+              { label: "GALLERY", href: "/gallery" },
             ].map((item) => (
               <motion.a
                 key={item.href}
@@ -213,6 +226,33 @@ const Header: React.FC = () => {
                 0
               </span>
             </button>
+            
+            {/* User menu */}
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                  <User className="w-5 h-5" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => navigate('/admin')} className="cursor-pointer">
+                    {profile?.role === 'admin' || profile?.role === 'editor' 
+                      ? 'Admin Panel' 
+                      : 'Profile'}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <button 
+                onClick={() => navigate('/auth')}
+                className="px-4 py-2 bg-brand text-white rounded-full hover:bg-brand/90 transition-colors"
+              >
+                Sign In
+              </button>
+            )}
           </motion.div>
         </div>
 
@@ -252,6 +292,30 @@ const Header: React.FC = () => {
             <motion.a variants={navItemVariants} href="/contact" className="block text-brand font-medium">
               CONTACT
             </motion.a>
+            <motion.a variants={navItemVariants} href="/gallery" className="block text-brand font-medium">
+              GALLERY
+            </motion.a>
+            
+            {user ? (
+              <>
+                <motion.a variants={navItemVariants} href="/admin" className="block text-brand font-medium">
+                  {profile?.role === 'admin' || profile?.role === 'editor' 
+                    ? 'ADMIN PANEL' 
+                    : 'PROFILE'}
+                </motion.a>
+                <motion.button 
+                  variants={navItemVariants} 
+                  onClick={signOut}
+                  className="block text-brand font-medium"
+                >
+                  SIGN OUT
+                </motion.button>
+              </>
+            ) : (
+              <motion.a variants={navItemVariants} href="/auth" className="block text-brand font-medium">
+                SIGN IN
+              </motion.a>
+            )}
           </motion.nav>
         )}
       </div>
@@ -260,4 +324,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
