@@ -42,9 +42,10 @@ const fadeUpCards = {
 /* ------------------------------------------------------------------ */
 
 const VideoHero: React.FC = () => {
-  // ⬇️  triggerOnce removed so inView toggles true/false every time
+  // Only trigger once, then stop observing
   const { ref: heroRef, inView: heroInView } = useInView({
     threshold: 0.2,
+    triggerOnce: true,
   });
 
   return (

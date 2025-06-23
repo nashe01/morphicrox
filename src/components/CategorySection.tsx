@@ -41,7 +41,7 @@ const categories: Category[] = [
   },
 ];
 
-// Custom cubic-bezier easing for smooth animation
+// Custom cubic-bezier easing
 const ease = cubicBezier(0.25, 0.1, 0.25, 1);
 
 const containerVariants: Variants = {
@@ -51,8 +51,8 @@ const containerVariants: Variants = {
     y: 0,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.3,  // slower stagger
-      duration: 1.4,         // longer duration for slow fade-in
+      staggerChildren: 0.3,
+      duration: 1.4,
       ease,
     },
   },
@@ -64,7 +64,7 @@ const cardVariants: Variants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 1, ease },  // slower, smoother animation
+    transition: { duration: 1, ease },
   },
 };
 
@@ -75,7 +75,7 @@ const CategorySection: React.FC = () => (
     variants={containerVariants}
     initial="hidden"
     whileInView="show"
-    viewport={{ amount: 0.25 }}
+    viewport={{ once: true, amount: 0.25 }}   // ⭐ play animations only once
   >
     <div className="max-w-7xl mx-auto px-6">
       <motion.div variants={cardVariants} className="text-center mb-16">
@@ -108,7 +108,9 @@ const CategorySection: React.FC = () => (
 
             <div className="absolute inset-0 flex flex-col justify-end p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
-              <p className="text-sm mb-4 text-white/90">{category.description}</p>
+              <p className="text-sm mb-4 text-white/90">
+                {category.description}
+              </p>
               <button className="flex items-center space-x-2 text-white hover:text-amber-200 transition-colors">
                 <span>Explore</span>
                 <ArrowRight className="w-4 h-4" />
