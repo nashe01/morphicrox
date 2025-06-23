@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface SiteContent {
@@ -15,9 +15,19 @@ interface SiteContent {
 export const useContent = (page?: string) => {
   const [content, setContent] = useState<SiteContent[]>([]);
   const [loading, setLoading] = useState(true);
+  const hasLoaded = useRef(false);
 
   useEffect(() => {
+    // For home page, only load once on first render
+    if (page === 'home' && hasLoaded.current) {
+      return;
+    }
+    
     fetchContent();
+    
+    if (page === 'home') {
+      hasLoaded.current = true;
+    }
   }, [page]);
 
   const fetchContent = async () => {

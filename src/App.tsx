@@ -12,11 +12,7 @@ import Hospitality from "./pages/Hospitality";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Laminate from "./pages/Laminate";
-import Showers from "./pages/products/Showers";
-import BathtubShowerCombos from "./pages/products/BathtubShowerCombos";
-import Bathtubs from "./pages/products/Bathtubs";
-import Countertops from "./pages/products/Countertops";
-import Sinks from "./pages/products/Sinks";
+import Products from "./pages/Products";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import Gallery from "./pages/Gallery";
@@ -39,11 +35,7 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/laminate" element={<Laminate />} />
-          <Route path="/products/showers" element={<Showers />} />
-          <Route path="/products/bathtub-shower-combos" element={<BathtubShowerCombos />} />
-          <Route path="/products/bathtubs" element={<Bathtubs />} />
-          <Route path="/products/countertops" element={<Countertops />} />
-          <Route path="/products/sinks" element={<Sinks />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/gallery" element={<Gallery />} />
