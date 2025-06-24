@@ -1,7 +1,8 @@
-// src/components/CategorySection.tsx
+
 import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
 
 interface Category {
   title: string;
@@ -68,68 +69,69 @@ const cardVariants: Variants = {
   },
 };
 
-const CategorySection: React.FC = () => (
-  <motion.section
-    id="category-section"
-    className="py-20 bg-gray-50"
-    variants={containerVariants}
-    initial="hidden"
-    whileInView="show"
-    viewport={{ once: true, amount: 0.25 }}   // ⭐ play animations only once
-  >
-    <div className="max-w-7xl mx-auto px-6">
-      <motion.div variants={cardVariants} className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
-          Our <span className="font-bold">Collections</span>
-        </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Discover our comprehensive range of bathroom solutions designed to
-          elevate your space
-        </p>
-      </motion.div>
+const CategorySection: React.FC = () => {
+  const { getContent } = useContent('home');
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {categories.map((category) => (
-          <motion.div
-            key={category.title}
-            variants={cardVariants}
-            className="group relative overflow-hidden bg-white rounded-sm shadow-lg hover:shadow-2xl transition-all duration-500"
-          >
-            <div className="aspect-[4/5] overflow-hidden">
-              <img
-                src={category.image}
-                alt={category.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div
-                className={`absolute inset-0 bg-gradient-to-t ${category.color} opacity-0 group-hover:opacity-80 transition-opacity duration-500`}
-              />
-            </div>
+  return (
+    <motion.section
+      id="category-section"
+      className="py-20 bg-gray-50"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div variants={cardVariants} className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+            Our <span className="font-bold">Collections</span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            {getContent('collections_description', 'Discover our comprehensive range of bathroom solutions designed to elevate your space')}
+          </p>
+        </motion.div>
 
-            <div className="absolute inset-0 flex flex-col justify-end p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
-              <p className="text-sm mb-4 text-white/90">
-                {category.description}
-              </p>
-              <button className="flex items-center space-x-2 text-white hover:text-amber-200 transition-colors">
-                <span>Explore</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {categories.map((category) => (
+            <motion.div
+              key={category.title}
+              variants={cardVariants}
+              className="group relative overflow-hidden bg-white rounded-sm shadow-lg hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="aspect-[4/5] overflow-hidden">
+                <img
+                  src={category.image}
+                  alt={category.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t ${category.color} opacity-0 group-hover:opacity-80 transition-opacity duration-500`}
+                />
+              </div>
 
-            <div className="p-6 group-hover:opacity-0 transition-opacity duration-500">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {category.title}
-              </h3>
-              <p className="text-gray-600 text-sm">{category.description}</p>
-            </div>
-          </motion.div>
-        ))}
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <h3 className="text-2xl font-bold mb-2">{category.title}</h3>
+                <p className="text-sm mb-4 text-white/90">
+                  {category.description}
+                </p>
+                <button className="flex items-center space-x-2 text-white hover:text-amber-200 transition-colors">
+                  <span>Explore</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="p-6 group-hover:opacity-0 transition-opacity duration-500">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {category.title}
+                </h3>
+                <p className="text-gray-600 text-sm">{category.description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
-  </motion.section>
-);
+    </motion.section>
+  );
+};
 
 export default CategorySection;
-
-

@@ -188,7 +188,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      create_admin_user: {
+        Args: { email: string; password: string }
+        Returns: string
+      }
+      is_admin_or_editor: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       content_type: "text" | "image" | "video" | "json"

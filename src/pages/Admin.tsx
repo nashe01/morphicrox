@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Trash2, Edit, Save, X, Upload, ExternalLink } from 'lucide-react';
+import { Trash2, Edit, Save, X, Upload, ExternalLink, UserPlus } from 'lucide-react';
 
 interface SiteContent {
   id: string;
@@ -52,6 +51,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [editingItem, setEditingItem] = useState<string | null>(null);
   const [message, setMessage] = useState('');
+  const [activeTab, setActiveTab] = useState('content');
 
   useEffect(() => {
     if (!authLoading) {
@@ -81,6 +81,37 @@ const Admin = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const createAdminUser = async () => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: 'mupindu021@gmail.com',
+        password: 'P@n@she01',
+        options: {
+          data: {
+            full_name: 'Admin User'
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      if (data.user) {
+        // Update user role to admin
+        const { error: roleError } = await supabase
+          .from('user_profiles')
+          .update({ role: 'admin' })
+          .eq('id', data.user.id);
+
+        if (roleError) throw roleError;
+
+        setMessage('Admin user created successfully! Please check email for verification.');
+      }
+    } catch (error: any) {
+      setMessage(`Error creating admin user: ${error.message}`);
+    }
+    setTimeout(() => setMessage(''), 5000);
   };
 
   const updateContent = async (id: string, updates: any) => {
@@ -162,6 +193,13 @@ const Admin = () => {
     }
   };
 
+  // Group content by page for better organization
+  const contentByPage = content.reduce((acc, item) => {
+    if (!acc[item.page]) acc[item.page] = [];
+    acc[item.page].push(item);
+    return acc;
+  }, {} as Record<string, SiteContent[]>);
+
   if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -179,6 +217,10 @@ const Admin = () => {
             <p className="text-gray-600">Manage your website content</p>
           </div>
           <div className="flex gap-4">
+            <Button onClick={createAdminUser} variant="outline">
+              <UserPlus className="w-4 h-4 mr-2" />
+              Create Admin User
+            </Button>
             <Button variant="outline" onClick={() => navigate('/')}>
               <ExternalLink className="w-4 h-4 mr-2" />
               View Site
@@ -196,7 +238,7 @@ const Admin = () => {
           </Alert>
         )}
 
-        <Tabs defaultValue="content" className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList>
             <TabsTrigger value="content">Site Content</TabsTrigger>
             <TabsTrigger value="projects">Gallery Projects</TabsTrigger>
@@ -204,54 +246,67 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="content">
-            <div className="grid gap-4">
-              {content.map((item) => (
-                <Card key={item.id}>
+            <div className="space-y-8">
+              {Object.entries(contentByPage).map(([page, items]) => (
+                <Card key={page}>
                   <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className="text-lg">{item.title}</CardTitle>
-                        <CardDescription>{item.description}</CardDescription>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setEditingItem(editingItem === item.id ? null : item.id)}
-                        >
-                          {editingItem === item.id ? <X className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
-                        </Button>
-                      </div>
-                    </div>
+                    <CardTitle className="capitalize">{page} Page Content</CardTitle>
+                    <CardDescription>Manage content for the {page} page</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    {editingItem === item.id ? (
-                      <div className="space-y-4">
-                        <div>
-                          <Label>Content</Label>
-                          <Textarea
-                            value={item.value}
-                            onChange={(e) => setContent(prev => prev.map(c => 
-                              c.id === item.id ? { ...c, value: e.target.value } : c
-                            ))}
-                            rows={4}
-                          />
-                        </div>
-                        <Button
-                          onClick={() => {
-                            updateContent(item.id, { value: item.value });
-                            setEditingItem(null);
-                          }}
-                        >
-                          <Save className="w-4 h-4 mr-2" />
-                          Save Changes
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="text-gray-700">
-                        {item.value}
-                      </div>
-                    )}
+                    <div className="grid gap-4">
+                      {items.map((item) => (
+                        <Card key={item.id} className="border-l-4 border-l-brand">
+                          <CardHeader className="pb-3">
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <CardTitle className="text-lg">{item.title}</CardTitle>
+                                <CardDescription>{item.description}</CardDescription>
+                              </div>
+                              <div className="flex gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => setEditingItem(editingItem === item.id ? null : item.id)}
+                                >
+                                  {editingItem === item.id ? <X className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
+                                </Button>
+                              </div>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            {editingItem === item.id ? (
+                              <div className="space-y-4">
+                                <div>
+                                  <Label>Content</Label>
+                                  <Textarea
+                                    value={item.value}
+                                    onChange={(e) => setContent(prev => prev.map(c => 
+                                      c.id === item.id ? { ...c, value: e.target.value } : c
+                                    ))}
+                                    rows={4}
+                                    className="mt-1"
+                                  />
+                                </div>
+                                <Button
+                                  onClick={() => {
+                                    updateContent(item.id, { value: item.value });
+                                    setEditingItem(null);
+                                  }}
+                                >
+                                  <Save className="w-4 h-4 mr-2" />
+                                  Save Changes
+                                </Button>
+                              </div>
+                            ) : (
+                              <div className="text-gray-700 bg-gray-50 p-3 rounded">
+                                {item.value}
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               ))}
