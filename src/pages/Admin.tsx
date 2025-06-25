@@ -1,16 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Trash2, Edit, Save, X, Upload, ExternalLink, UserPlus } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AdminHeader from '@/components/admin/AdminHeader';
+import ContentManager from '@/components/admin/ContentManager';
+import ProjectsManager from '@/components/admin/ProjectsManager';
+import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 interface SiteContent {
   id: string;
@@ -32,52 +28,37 @@ interface GalleryProject {
   order_index: number;
 }
 
-interface GalleryVideo {
-  id: string;
-  title: string;
-  description: string;
-  video_url: string;
-  thumbnail_url: string;
-  featured: boolean;
-  order_index: number;
-}
-
 const Admin = () => {
-  const { user, profile, loading: authLoading } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthorized, authCheckComplete, loading: authLoading } = useAdminAuth();
   const [content, setContent] = useState<SiteContent[]>([]);
   const [projects, setProjects] = useState<GalleryProject[]>([]);
-  const [videos, setVideos] = useState<GalleryVideo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [editingItem, setEditingItem] = useState<string | null>(null);
   const [message, setMessage] = useState('');
   const [activeTab, setActiveTab] = useState('content');
 
   useEffect(() => {
-    if (!authLoading) {
-      if (!user) {
-        navigate('/auth');
-      } else if (!profile?.role || !['admin', 'editor'].includes(profile.role)) {
-        navigate('/');
-      } else {
-        fetchData();
-      }
+    if (isAuthorized && authCheckComplete) {
+      console.log('Admin authorized, fetching data');
+      fetchData();
     }
-  }, [user, profile, authLoading, navigate]);
+  }, [isAuthorized, authCheckComplete]);
 
   const fetchData = async () => {
     try {
-      const [contentData, projectsData, videosData] = await Promise.all([
+      console.log('Fetching admin data...');
+      const [contentData, projectsData] = await Promise.all([
         supabase.from('site_content').select('*').order('page'),
-        supabase.from('gallery_projects').select('*').order('order_index'),
-        supabase.from('gallery_videos').select('*').order('order_index')
+        supabase.from('gallery_projects').select('*').order('order_index')
       ]);
+
+      console.log('Content data:', contentData);
+      console.log('Projects data:', projectsData);
 
       if (contentData.data) setContent(contentData.data);
       if (projectsData.data) setProjects(projectsData.data);
-      if (videosData.data) setVideos(videosData.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+      setMessage('Failed to load admin data');
     } finally {
       setLoading(false);
     }
@@ -98,17 +79,16 @@ const Admin = () => {
       if (error) throw error;
 
       if (data.user) {
-        // Update user role to admin
         const { error: roleError } = await supabase
           .from('user_profiles')
           .update({ role: 'admin' })
           .eq('id', data.user.id);
 
         if (roleError) throw roleError;
-
         setMessage('Admin user created successfully! Please check email for verification.');
       }
     } catch (error: any) {
+      console.error('Error creating admin user:', error);
       setMessage(`Error creating admin user: ${error.message}`);
     }
     setTimeout(() => setMessage(''), 5000);
@@ -130,7 +110,15 @@ const Admin = () => {
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       console.error('Error updating content:', error);
+      setMessage('Failed to update content');
+      setTimeout(() => setMessage(''), 3000);
     }
+  };
+
+  const handleContentChange = (id: string, value: string) => {
+    setContent(prev => prev.map(item => 
+      item.id === id ? { ...item, value } : item
+    ));
   };
 
   const updateProject = async (id: string, updates: any) => {
@@ -149,7 +137,15 @@ const Admin = () => {
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       console.error('Error updating project:', error);
+      setMessage('Failed to update project');
+      setTimeout(() => setMessage(''), 3000);
     }
+  };
+
+  const handleProjectChange = (id: string, field: string, value: any) => {
+    setProjects(prev => prev.map(item => 
+      item.id === id ? { ...item, [field]: value } : item
+    ));
   };
 
   const addProject = async () => {
@@ -173,6 +169,8 @@ const Admin = () => {
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       console.error('Error adding project:', error);
+      setMessage('Failed to add project');
+      setTimeout(() => setMessage(''), 3000);
     }
   };
 
@@ -190,20 +188,43 @@ const Admin = () => {
       setTimeout(() => setMessage(''), 3000);
     } catch (error) {
       console.error('Error deleting project:', error);
+      setMessage('Failed to delete project');
+      setTimeout(() => setMessage(''), 3000);
     }
   };
 
-  // Group content by page for better organization
-  const contentByPage = content.reduce((acc, item) => {
-    if (!acc[item.page]) acc[item.page] = [];
-    acc[item.page].push(item);
-    return acc;
-  }, {} as Record<string, SiteContent[]>);
-
-  if (authLoading || loading) {
+  // Show loading while checking authentication
+  if (authLoading || !authCheckComplete) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading admin panel...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-brand mx-auto mb-4"></div>
+          <div className="text-lg">Checking authorization...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading while fetching data
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-brand mx-auto mb-4"></div>
+          <div className="text-lg">Loading admin panel...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Only render admin panel if user is authorized
+  if (!isAuthorized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">Access Denied</h1>
+          <p className="text-gray-600">You don't have permission to access the admin panel.</p>
+        </div>
       </div>
     );
   }
@@ -211,26 +232,7 @@ const Admin = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Admin Panel</h1>
-            <p className="text-gray-600">Manage your website content</p>
-          </div>
-          <div className="flex gap-4">
-            <Button onClick={createAdminUser} variant="outline">
-              <UserPlus className="w-4 h-4 mr-2" />
-              Create Admin User
-            </Button>
-            <Button variant="outline" onClick={() => navigate('/')}>
-              <ExternalLink className="w-4 h-4 mr-2" />
-              View Site
-            </Button>
-            <Button variant="outline" onClick={() => navigate('/gallery')}>
-              <ExternalLink className="w-4 h-4 mr-2" />
-              View Gallery
-            </Button>
-          </div>
-        </div>
+        <AdminHeader onCreateAdminUser={createAdminUser} />
 
         {message && (
           <Alert className="mb-6">
@@ -246,199 +248,21 @@ const Admin = () => {
           </TabsList>
 
           <TabsContent value="content">
-            <div className="space-y-8">
-              {Object.entries(contentByPage).map(([page, items]) => (
-                <Card key={page}>
-                  <CardHeader>
-                    <CardTitle className="capitalize">{page} Page Content</CardTitle>
-                    <CardDescription>Manage content for the {page} page</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid gap-4">
-                      {items.map((item) => (
-                        <Card key={item.id} className="border-l-4 border-l-brand">
-                          <CardHeader className="pb-3">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <CardTitle className="text-lg">{item.title}</CardTitle>
-                                <CardDescription>{item.description}</CardDescription>
-                              </div>
-                              <div className="flex gap-2">
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => setEditingItem(editingItem === item.id ? null : item.id)}
-                                >
-                                  {editingItem === item.id ? <X className="w-4 h-4" /> : <Edit className="w-4 h-4" />}
-                                </Button>
-                              </div>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            {editingItem === item.id ? (
-                              <div className="space-y-4">
-                                <div>
-                                  <Label>Content</Label>
-                                  <Textarea
-                                    value={item.value}
-                                    onChange={(e) => setContent(prev => prev.map(c => 
-                                      c.id === item.id ? { ...c, value: e.target.value } : c
-                                    ))}
-                                    rows={4}
-                                    className="mt-1"
-                                  />
-                                </div>
-                                <Button
-                                  onClick={() => {
-                                    updateContent(item.id, { value: item.value });
-                                    setEditingItem(null);
-                                  }}
-                                >
-                                  <Save className="w-4 h-4 mr-2" />
-                                  Save Changes
-                                </Button>
-                              </div>
-                            ) : (
-                              <div className="text-gray-700 bg-gray-50 p-3 rounded">
-                                {item.value}
-                              </div>
-                            )}
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <ContentManager
+              content={content}
+              onUpdateContent={updateContent}
+              onContentChange={handleContentChange}
+            />
           </TabsContent>
 
           <TabsContent value="projects">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold">Gallery Projects</h2>
-                <Button onClick={addProject}>Add New Project</Button>
-              </div>
-              
-              <div className="grid gap-4">
-                {projects.map((project) => (
-                  <Card key={project.id}>
-                    <CardContent className="pt-6">
-                      {editingItem === project.id ? (
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <Label>Title</Label>
-                              <Input
-                                value={project.title}
-                                onChange={(e) => setProjects(prev => prev.map(p => 
-                                  p.id === project.id ? { ...p, title: e.target.value } : p
-                                ))}
-                              />
-                            </div>
-                            <div>
-                              <Label>Category</Label>
-                              <Input
-                                value={project.category}
-                                onChange={(e) => setProjects(prev => prev.map(p => 
-                                  p.id === project.id ? { ...p, category: e.target.value } : p
-                                ))}
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <Label>Image URL</Label>
-                            <Input
-                              value={project.image_url}
-                              onChange={(e) => setProjects(prev => prev.map(p => 
-                                p.id === project.id ? { ...p, image_url: e.target.value } : p
-                              ))}
-                            />
-                          </div>
-                          <div>
-                            <Label>Description</Label>
-                            <Textarea
-                              value={project.description}
-                              onChange={(e) => setProjects(prev => prev.map(p => 
-                                p.id === project.id ? { ...p, description: e.target.value } : p
-                              ))}
-                            />
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <Switch
-                              checked={project.featured}
-                              onCheckedChange={(checked) => setProjects(prev => prev.map(p => 
-                                p.id === project.id ? { ...p, featured: checked } : p
-                              ))}
-                            />
-                            <Label>Featured Project</Label>
-                          </div>
-                          <div className="flex gap-2">
-                            <Button
-                              onClick={() => {
-                                updateProject(project.id, {
-                                  title: project.title,
-                                  category: project.category,
-                                  image_url: project.image_url,
-                                  description: project.description,
-                                  featured: project.featured
-                                });
-                                setEditingItem(null);
-                              }}
-                            >
-                              <Save className="w-4 h-4 mr-2" />
-                              Save Changes
-                            </Button>
-                            <Button
-                              variant="outline"
-                              onClick={() => setEditingItem(null)}
-                            >
-                              Cancel
-                            </Button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex items-start gap-4">
-                          <img
-                            src={project.image_url}
-                            alt={project.title}
-                            className="w-24 h-24 object-cover rounded"
-                          />
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <h3 className="font-semibold">{project.title}</h3>
-                              {project.featured && (
-                                <span className="bg-brand text-white px-2 py-1 rounded-full text-xs">
-                                  Featured
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-600 mb-2">{project.category}</p>
-                            <p className="text-sm text-gray-700">{project.description}</p>
-                          </div>
-                          <div className="flex gap-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => setEditingItem(project.id)}
-                            >
-                              <Edit className="w-4 h-4" />
-                            </Button>
-                            <Button
-                              variant="destructive"
-                              size="sm"
-                              onClick={() => deleteProject(project.id)}
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
+            <ProjectsManager
+              projects={projects}
+              onUpdateProject={updateProject}
+              onAddProject={addProject}
+              onDeleteProject={deleteProject}
+              onProjectChange={handleProjectChange}
+            />
           </TabsContent>
 
           <TabsContent value="videos">
