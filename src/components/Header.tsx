@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Menu, User, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -74,10 +73,18 @@ const Header: React.FC = () => {
 
   const handleAdminAccess = () => {
     console.log('Admin access clicked', { user, profile });
-    if (user && profile && (profile.role === 'admin' || profile.role === 'editor')) {
-      navigate("/admin");
+    if (user && profile) {
+      console.log('User role:', profile.role);
+      if (profile.role === 'admin' || profile.role === 'editor') {
+        console.log('Navigating to admin panel');
+        navigate("/admin");
+      } else {
+        console.error('Access denied - insufficient permissions', { role: profile?.role });
+        alert('Access denied - insufficient permissions');
+      }
     } else {
-      console.error('Access denied - insufficient permissions', { role: profile?.role });
+      console.error('No user or profile found');
+      alert('Please log in to access admin panel');
     }
   };
 
