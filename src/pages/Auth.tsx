@@ -64,8 +64,6 @@ const Auth = () => {
       {/* Background image container with white spacing */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-2/5 h-4/5 max-w-2xl max-h-[800px] bg-cover bg-center bg-no-repeat rounded-3xl" style={{ backgroundImage: 'url(/images/loggin.png)' }}>
-          {/* Overlay for better readability */}
-          <div className="w-full h-full bg-black/40 backdrop-blur-sm rounded-3xl"></div>
         </div>
       </div>
       
@@ -96,8 +94,8 @@ const Auth = () => {
             <button
               className={`flex-1 py-3 rounded-xl font-semibold transition-all duration-200 ${
                 tab === 'signin' 
-                  ? 'bg-blue-600/90 text-white shadow-lg shadow-blue-600/25 backdrop-blur-sm' 
-                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25 backdrop-blur-sm' 
+                  : 'bg-white/40 text-white hover:bg-white/50 backdrop-blur-sm border border-white/50'
               }`}
               onClick={() => setTab('signin')}
               type="button"
@@ -107,8 +105,8 @@ const Auth = () => {
             <button
               className={`flex-1 py-3 rounded-xl font-semibold transition-all duration-200 ${
                 tab === 'signup' 
-                  ? 'bg-blue-600/90 text-white shadow-lg shadow-blue-600/25 backdrop-blur-sm' 
-                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30'
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25 backdrop-blur-sm' 
+                  : 'bg-white/40 text-white hover:bg-white/50 backdrop-blur-sm border border-white/50'
               }`}
               onClick={() => setTab('signup')}
               type="button"
@@ -125,7 +123,7 @@ const Auth = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="rounded-xl bg-white/90 border border-white/30 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
+                className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
               />
               <Input
                 type="password"
@@ -133,11 +131,11 @@ const Auth = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="rounded-xl bg-white/90 border border-white/30 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
+                className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
               />
               <Button 
                 type="submit" 
-                className="w-full rounded-xl bg-blue-600/90 hover:bg-blue-700/90 text-white text-lg font-semibold py-3 shadow-lg shadow-blue-600/25 transition-all duration-200 transform hover:scale-[1.02] backdrop-blur-sm" 
+                className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 shadow-lg shadow-blue-600/25 transition-all duration-200 transform hover:scale-[1.02] backdrop-blur-sm" 
                 disabled={loading}
               >
                 {loading ? 'Signing In...' : 'Sign In'}
@@ -154,7 +152,7 @@ const Auth = () => {
                   value={fullName.split(' ')[0] || ''}
                   onChange={(e) => setFullName(e.target.value + (fullName.includes(' ') ? ' ' + fullName.split(' ').slice(1).join(' ') : ''))}
                   required
-                  className="rounded-xl bg-white/90 border border-white/30 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600 flex-1"
+                  className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600 flex-1"
                 />
                 <Input
                   type="text"
@@ -162,7 +160,7 @@ const Auth = () => {
                   value={fullName.split(' ')[1] || ''}
                   onChange={(e) => setFullName((fullName.split(' ')[0] || '') + ' ' + e.target.value)}
                   required
-                  className="rounded-xl bg-white/90 border border-white/30 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600 flex-1"
+                  className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600 flex-1"
                 />
               </div>
               <Input
@@ -171,7 +169,7 @@ const Auth = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="rounded-xl bg-white/90 border border-white/30 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
+                className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
               />
               <Input
                 type="password"
@@ -179,11 +177,11 @@ const Auth = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="rounded-xl bg-white/90 border border-white/30 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
+                className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
               />
               <Button 
                 type="submit" 
-                className="w-full rounded-xl bg-blue-600/90 hover:bg-blue-700/90 text-white text-lg font-semibold py-3 shadow-lg shadow-blue-600/25 transition-all duration-200 transform hover:scale-[1.02] backdrop-blur-sm" 
+                className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 shadow-lg shadow-blue-600/25 transition-all duration-200 transform hover:scale-[1.02] backdrop-blur-sm" 
                 disabled={loading}
               >
                 {loading ? 'Signing Up...' : 'Create account'}
@@ -192,7 +190,7 @@ const Auth = () => {
           )}
 
           {error && (
-            <Alert className="mt-4 bg-red-500/20 border-red-400/30 backdrop-blur-sm">
+            <Alert className="mt-4 bg-red-500/40 border-red-400/50 backdrop-blur-sm">
               <AlertDescription className="text-red-200 drop-shadow-lg">{error}</AlertDescription>
             </Alert>
           )}
