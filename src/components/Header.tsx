@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Menu, User, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -71,6 +72,15 @@ const Header: React.FC = () => {
   const { user, profile, signOut } = useAuth();
   const navigate = useNavigate();
 
+  const handleAdminAccess = () => {
+    console.log('Admin access clicked', { user, profile });
+    if (user && profile && (profile.role === 'admin' || profile.role === 'editor')) {
+      navigate("/admin");
+    } else {
+      console.error('Access denied - insufficient permissions', { role: profile?.role });
+    }
+  };
+
   return (
     <motion.header
       initial="hidden"
@@ -136,7 +146,7 @@ const Header: React.FC = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem
-                      onClick={() => navigate("/admin")}
+                      onClick={handleAdminAccess}
                       className="cursor-pointer"
                     >
                       {profile?.role === "admin" || profile?.role === "editor"
@@ -219,19 +229,19 @@ const Header: React.FC = () => {
             </motion.a>
             {user ? (
               <>
-                <motion.a
+                <motion.button
                   variants={navItemVariants}
-                  href="/admin"
-                  className="block text-brand font-medium"
+                  onClick={handleAdminAccess}
+                  className="block text-brand font-medium text-left w-full"
                 >
                   {profile?.role === "admin" || profile?.role === "editor"
                     ? "ADMIN PANEL"
                     : "PROFILE"}
-                </motion.a>
+                </motion.button>
                 <motion.button
                   variants={navItemVariants}
                   onClick={signOut}
-                  className="block text-brand font-medium"
+                  className="block text-brand font-medium text-left w-full"
                 >
                   SIGN OUT
                 </motion.button>
@@ -243,7 +253,7 @@ const Header: React.FC = () => {
                 className="block text-brand font-medium"
               >
                 SIGN IN
-              </motion.a>
+              </a>
             )}
           </motion.nav>
         )}
@@ -253,4 +263,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
