@@ -179,7 +179,7 @@ const Auth = () => {
       {/* Right: Decorative image/shape */}
       <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-tr from-brand-50 to-brand-100 relative overflow-hidden">
         <img
-          src="/placeholder.svg"
+          src="/images/loggin.png"
           alt="Decorative background"
           className="object-cover w-full h-full max-h-[90vh] rounded-l-3xl shadow-2xl"
         />
