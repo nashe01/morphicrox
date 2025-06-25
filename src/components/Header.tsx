@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Menu, User, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -80,6 +81,15 @@ const Header: React.FC = () => {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate("/");
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
+  };
+
   return (
     <motion.header
       initial="hidden"
@@ -92,7 +102,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <motion.img
             variants={groupVariants}
-            src="/lovable-uploads/9aeca46e-6ec2-4e7f-a3fa-94e925134823.png"
+            src="/lovable-uploads/e452e626-2fe4-4654-88a8-e17455eb772b.png"
             alt="MorphicRox Logo"
             className="h-12 w-auto cursor-pointer"
             onClick={() => navigate("/")}
@@ -140,21 +150,27 @@ const Header: React.FC = () => {
             >
               {user ? (
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="p-2 hover:bg-gray-100 rounded-full">
-                    <User className="w-5 h-5" />
+                  <DropdownMenuTrigger asChild>
+                    <button className="p-2 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand/20">
+                      <User className="w-5 h-5" />
+                    </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent 
+                    align="end" 
+                    className="w-48 bg-white border border-gray-200 shadow-lg z-50"
+                    sideOffset={5}
+                  >
                     <DropdownMenuItem
                       onClick={handleAdminAccess}
-                      className="cursor-pointer"
+                      className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
                     >
                       {profile?.role === "admin" || profile?.role === "editor"
                         ? "Admin Panel"
                         : "Profile"}
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      onClick={signOut}
-                      className="cursor-pointer"
+                      onClick={handleSignOut}
+                      className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
                     >
                       <LogOut className="w-4 h-4 mr-2" />
                       Sign Out
@@ -239,7 +255,7 @@ const Header: React.FC = () => {
                 </motion.button>
                 <motion.button
                   variants={navItemVariants}
-                  onClick={signOut}
+                  onClick={handleSignOut}
                   className="block text-brand font-medium text-left w-full"
                 >
                   SIGN OUT
