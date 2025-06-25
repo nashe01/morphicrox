@@ -60,22 +60,25 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-background font-pin-sans">
-      {/* Left: Form */}
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-16 py-12 bg-background">
-        <div className="max-w-md w-full mx-auto">
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-muted-foreground font-semibold tracking-wide text-sm">START FOR FREE</span>
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative" style={{ backgroundImage: 'url(/images/loggin.png)' }}>
+      {/* Overlay for better readability */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+      
+      {/* Login Form Container */}
+      <div className="relative z-10 w-full max-w-md mx-4">
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/20">
+          <div className="mb-8 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-gray-600 font-semibold tracking-wide text-sm">START FOR FREE</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2 flex items-center gap-2">
+            <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
               Create new account
-              <span className="inline-block w-3 h-3 rounded-full bg-brand" />
+              <span className="inline-block w-3 h-3 rounded-full bg-blue-600" />
             </h1>
-            <div className="text-muted-foreground text-base mb-2">
+            <div className="text-gray-600 text-base mb-2">
               Already A Member?{' '}
               <button
-                className="text-brand font-medium hover:underline focus:outline-none"
+                className="text-blue-600 font-medium hover:underline focus:outline-none"
                 type="button"
                 onClick={() => setTab('signin')}
               >
@@ -84,109 +87,111 @@ const Auth = () => {
             </div>
           </div>
 
-          <div className="bg-card rounded-2xl shadow-lg p-8">
-            <div className="flex mb-6 gap-2">
-              <button
-                className={`flex-1 py-2 rounded-lg font-semibold transition-colors ${tab === 'signin' ? 'bg-brand text-white shadow' : 'bg-muted text-foreground'}`}
-                onClick={() => setTab('signin')}
-                type="button"
-              >
-                Sign In
-              </button>
-              <button
-                className={`flex-1 py-2 rounded-lg font-semibold transition-colors ${tab === 'signup' ? 'bg-brand text-white shadow' : 'bg-muted text-foreground'}`}
-                onClick={() => setTab('signup')}
-                type="button"
-              >
-                Sign Up
-              </button>
-            </div>
-
-            {tab === 'signin' && (
-              <form onSubmit={handleSignIn} className="space-y-5 animate-fade-in">
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="rounded-xl bg-muted/60 border border-input px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand"
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="rounded-xl bg-muted/60 border border-input px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand"
-                />
-                <Button type="submit" className="w-full rounded-xl bg-brand hover:bg-brand-700 text-white text-lg font-semibold py-3 shadow-md transition-colors" disabled={loading}>
-                  {loading ? 'Signing In...' : 'Sign In'}
-                </Button>
-              </form>
-            )}
-
-            {tab === 'signup' && (
-              <form onSubmit={handleSignUp} className="space-y-5 animate-fade-in">
-                <div className="flex gap-3">
-                  <Input
-                    type="text"
-                    placeholder="First name"
-                    value={fullName.split(' ')[0] || ''}
-                    onChange={(e) => setFullName(e.target.value + (fullName.includes(' ') ? ' ' + fullName.split(' ').slice(1).join(' ') : ''))}
-                    required
-                    className="rounded-xl bg-muted/60 border border-input px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand flex-1"
-                  />
-                  <Input
-                    type="text"
-                    placeholder="Last name"
-                    value={fullName.split(' ')[1] || ''}
-                    onChange={(e) => setFullName((fullName.split(' ')[0] || '') + ' ' + e.target.value)}
-                    required
-                    className="rounded-xl bg-muted/60 border border-input px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand flex-1"
-                  />
-                </div>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="rounded-xl bg-muted/60 border border-input px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand"
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="rounded-xl bg-muted/60 border border-input px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand"
-                />
-                <Button type="submit" className="w-full rounded-xl bg-brand hover:bg-brand-700 text-white text-lg font-semibold py-3 shadow-md transition-colors" disabled={loading}>
-                  {loading ? 'Signing Up...' : 'Create account'}
-                </Button>
-              </form>
-            )}
-
-            {error && (
-              <Alert className="mt-4">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+          <div className="flex mb-6 gap-2">
+            <button
+              className={`flex-1 py-3 rounded-xl font-semibold transition-all duration-200 ${
+                tab === 'signin' 
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+              onClick={() => setTab('signin')}
+              type="button"
+            >
+              Sign In
+            </button>
+            <button
+              className={`flex-1 py-3 rounded-xl font-semibold transition-all duration-200 ${
+                tab === 'signup' 
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+              onClick={() => setTab('signup')}
+              type="button"
+            >
+              Sign Up
+            </button>
           </div>
+
+          {tab === 'signin' && (
+            <form onSubmit={handleSignIn} className="space-y-5 animate-fade-in">
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="rounded-xl bg-white/80 border border-gray-200 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+              />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="rounded-xl bg-white/80 border border-gray-200 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+              />
+              <Button 
+                type="submit" 
+                className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 shadow-lg shadow-blue-600/25 transition-all duration-200 transform hover:scale-[1.02]" 
+                disabled={loading}
+              >
+                {loading ? 'Signing In...' : 'Sign In'}
+              </Button>
+            </form>
+          )}
+
+          {tab === 'signup' && (
+            <form onSubmit={handleSignUp} className="space-y-5 animate-fade-in">
+              <div className="flex gap-3">
+                <Input
+                  type="text"
+                  placeholder="First name"
+                  value={fullName.split(' ')[0] || ''}
+                  onChange={(e) => setFullName(e.target.value + (fullName.includes(' ') ? ' ' + fullName.split(' ').slice(1).join(' ') : ''))}
+                  required
+                  className="rounded-xl bg-white/80 border border-gray-200 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all flex-1"
+                />
+                <Input
+                  type="text"
+                  placeholder="Last name"
+                  value={fullName.split(' ')[1] || ''}
+                  onChange={(e) => setFullName((fullName.split(' ')[0] || '') + ' ' + e.target.value)}
+                  required
+                  className="rounded-xl bg-white/80 border border-gray-200 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all flex-1"
+                />
+              </div>
+              <Input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="rounded-xl bg-white/80 border border-gray-200 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+              />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="rounded-xl bg-white/80 border border-gray-200 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+              />
+              <Button 
+                type="submit" 
+                className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 shadow-lg shadow-blue-600/25 transition-all duration-200 transform hover:scale-[1.02]" 
+                disabled={loading}
+              >
+                {loading ? 'Signing Up...' : 'Create account'}
+              </Button>
+            </form>
+          )}
+
+          {error && (
+            <Alert className="mt-4 bg-red-50 border-red-200">
+              <AlertDescription className="text-red-700">{error}</AlertDescription>
+            </Alert>
+          )}
         </div>
-      </div>
-      {/* Right: Decorative image/shape */}
-      <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-tr from-brand-50 to-brand-100 relative overflow-hidden">
-        <img
-          src="/images/loggin.png"
-          alt="Decorative background"
-          className="object-cover w-full h-full max-h-[90vh] rounded-l-3xl shadow-2xl"
-        />
-        {/* Optional: Add a logo or watermark at the bottom right */}
-        {/* <div className="absolute bottom-8 right-8 opacity-70">
-          <img src="/logo.svg" alt="Logo" className="h-10" />
-        </div> */}
       </div>
     </div>
   );
