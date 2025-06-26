@@ -1,6 +1,5 @@
-
 import React from "react";
-import Header from "../components/Header";
+import PageWrapper from "../components/PageWrapper";
 import Footer from "../components/Footer";
 import {
   Phone,
@@ -30,9 +29,7 @@ const socials: SocialLink[] = [
 ];
 
 const Contact = () => (
-  <div className="min-h-screen flex flex-col">
-    <Header />
-
+  <PageWrapper>
     {/* ───────── Hero ───────── */}
     <section
       className="relative h-72 md:h-96 bg-cover bg-center"
@@ -222,7 +219,7 @@ const Contact = () => (
     </section>
 
     <Footer />
-  </div>
+  </PageWrapper>
 );
 
 export default Contact;

@@ -1,9 +1,9 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { PageLoadingProvider } from "@/hooks/usePageLoading";
 import Index from "./pages/Index";
 import Bathrooms from "./pages/Bathrooms";
 import Kitchens from "./pages/Kitchens";
@@ -22,28 +22,30 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/bathrooms" element={<Bathrooms />} />
-          <Route path="/kitchens" element={<Kitchens />} />
-          <Route path="/office" element={<Office />} />
-          <Route path="/hospitality" element={<Hospitality />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/laminate" element={<Laminate />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/gallery" element={<Gallery />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <PageLoadingProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/bathrooms" element={<Bathrooms />} />
+            <Route path="/kitchens" element={<Kitchens />} />
+            <Route path="/office" element={<Office />} />
+            <Route path="/hospitality" element={<Hospitality />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/laminate" element={<Laminate />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/gallery" element={<Gallery />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </PageLoadingProvider>
   </QueryClientProvider>
 );
 

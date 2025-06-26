@@ -1,7 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import Header from '@/components/Header';
+import PageWrapper from '@/components/PageWrapper';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
@@ -84,8 +83,7 @@ const Gallery = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white">
-        <Header />
+      <PageWrapper>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-brand mx-auto mb-4"></div>
@@ -93,14 +91,13 @@ const Gallery = () => {
           </div>
         </div>
         <Footer />
-      </div>
+      </PageWrapper>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen bg-white">
-        <Header />
+      <PageWrapper>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
             <div className="text-red-500 mb-4">Error: {error}</div>
@@ -113,14 +110,12 @@ const Gallery = () => {
           </div>
         </div>
         <Footer />
-      </div>
+      </PageWrapper>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      
+    <PageWrapper>
       <div className="max-w-7xl mx-auto px-6 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -266,7 +261,7 @@ const Gallery = () => {
       </div>
 
       <Footer />
-    </div>
+    </PageWrapper>
   );
 };
 

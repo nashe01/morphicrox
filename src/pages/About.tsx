@@ -1,6 +1,5 @@
-
 import React, { useEffect } from "react";
-import Header from "../components/Header";
+import PageWrapper from "../components/PageWrapper";
 import Footer from "../components/Footer";
 import AboutHero from "../components/about/AboutHero";
 import AboutIntro from "../components/about/AboutIntro";
@@ -32,9 +31,7 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Header />
-
+    <PageWrapper>
       {/* ── HERO ────────────────────────────────────────────────────── */}
       <AboutHero />
 
@@ -51,7 +48,7 @@ const About: React.FC = () => {
         </div>
         <Footer />
       </main>
-    </div>
+    </PageWrapper>
   );
 };
 

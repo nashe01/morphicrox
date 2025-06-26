@@ -1,6 +1,5 @@
-
 import React, { useEffect } from 'react';
-import Header from '../components/Header';
+import PageWrapper from '../components/PageWrapper';
 import VideoHero from '../components/VideoHero';
 import CategorySection from '../components/CategorySection';
 import FeaturesSection from '../components/FeaturesSection';
@@ -41,15 +40,14 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
-      <Header />
+    <PageWrapper>
       <VideoHero />
       <div id="main-content" className="relative bg-white z-30 mt-[-5vh]">
         <CategorySection />
         <FeaturesSection />
         <Footer />
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 
