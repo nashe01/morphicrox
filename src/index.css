@@ -172,3 +172,9 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(204, 85, 0, 0.8);
 }
+
+/* Custom placeholder styles */
+.placeholder-orange::placeholder {
+  color: rgb(204, 85, 0) !important;
+  opacity: 1 !important;
+}

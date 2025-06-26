@@ -37,6 +37,14 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white relative">
+      {/* Back Button */}
+      <button
+        onClick={() => navigate('/')}
+        className="absolute top-6 left-6 z-20 flex items-center gap-2 text-black hover:text-white transition-colors bg-brand hover:bg-brand-700 rounded-lg px-4 py-2 border border-brand-600 font-medium shadow-lg"
+      >
+        ← Back
+      </button>
+
       {/* Background image container with white spacing */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="w-2/5 h-4/5 max-w-2xl max-h-[800px] bg-cover bg-center bg-no-repeat rounded-3xl" style={{ backgroundImage: 'url(/images/loggin.png)' }}>
@@ -44,23 +52,23 @@ const Auth = () => {
       </div>
       
       {/* Login Form Container */}
-      <div className="relative z-10 w-full max-w-md mx-4">
-        <div className="bg-transparent backdrop-blur-md rounded-3xl p-8">
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold text-white mb-2 flex items-center justify-center gap-2 drop-shadow-lg">
-              Sign in to your account
+      <div className="relative z-10 w-full max-w-xs mx-4">
+        <div className="bg-transparent backdrop-blur-md rounded-3xl p-6">
+          <div className="mb-6 text-center">
+            <h1 className="text-2xl font-semibold text-black mb-2 flex items-center justify-center gap-2 drop-shadow-lg">
+              Sign in to admin panel
               <span className="inline-block w-3 h-3 rounded-full bg-brand" />
             </h1>
           </div>
 
-          <form onSubmit={handleSignIn} className="space-y-5 animate-fade-in">
+          <form onSubmit={handleSignIn} className="space-y-4 animate-fade-in">
             <Input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
+              className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-base shadow-sm focus:ring-2 focus:ring-brand focus:border-transparent transition-all backdrop-blur-sm placeholder-orange"
             />
             <Input
               type="password"
@@ -68,12 +76,12 @@ const Auth = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-lg shadow-sm focus:ring-2 focus:ring-brand focus:border-transparent transition-all backdrop-blur-sm placeholder-gray-600"
+              className="rounded-xl bg-white/95 border border-white/50 px-4 py-3 text-base shadow-sm focus:ring-2 focus:ring-brand focus:border-transparent transition-all backdrop-blur-sm placeholder-orange"
             />
             <div className="flex justify-center">
               <Button 
                 type="submit" 
-                className="w-1/3 rounded-xl bg-brand hover:bg-brand-700 text-white text-lg font-semibold py-3 shadow-lg shadow-brand/25 transition-all duration-200 transform hover:scale-[1.02] backdrop-blur-sm" 
+                className="w-1/3 rounded-xl bg-brand hover:bg-brand-700 text-black hover:text-white text-base font-normal py-3 shadow-lg border border-brand-600 transition-all duration-200 transform hover:scale-[1.02]" 
                 disabled={loading}
               >
                 {loading ? 'Signing In...' : 'Sign In'}
