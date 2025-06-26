@@ -27,17 +27,28 @@ export const PageLoadingProvider: React.FC<PageLoadingProviderProps> = ({ childr
   const [pageContentLoaded, setPageContentLoaded] = useState(false);
 
   const resetLoadingState = () => {
+    console.log('Resetting loading state');
     setHeaderLoaded(false);
     setPageContentLoaded(false);
+  };
+
+  const handleSetHeaderLoaded = (loaded: boolean) => {
+    console.log('Setting headerLoaded to:', loaded);
+    setHeaderLoaded(loaded);
+  };
+
+  const handleSetPageContentLoaded = (loaded: boolean) => {
+    console.log('Setting pageContentLoaded to:', loaded);
+    setPageContentLoaded(loaded);
   };
 
   return (
     <PageLoadingContext.Provider
       value={{
         headerLoaded,
-        setHeaderLoaded,
+        setHeaderLoaded: handleSetHeaderLoaded,
         pageContentLoaded,
-        setPageContentLoaded,
+        setPageContentLoaded: handleSetPageContentLoaded,
         resetLoadingState,
       }}
     >

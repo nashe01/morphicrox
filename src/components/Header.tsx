@@ -102,9 +102,13 @@ const Header: React.FC<HeaderProps> = ({ onLoadComplete }) => {
   };
 
   const handleAnimationComplete = () => {
+    console.log('Header animation completed, calling onLoadComplete');
     // Call onLoadComplete after header animation finishes
     if (onLoadComplete) {
+      console.log('onLoadComplete function exists, calling it');
       onLoadComplete();
+    } else {
+      console.log('onLoadComplete function is undefined');
     }
   };
 
