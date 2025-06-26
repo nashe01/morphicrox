@@ -1,10 +1,12 @@
+
 import React from 'react';
-import PageWrapper from '../components/PageWrapper';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const Office = () => {
   return (
-    <PageWrapper>
+    <div className="min-h-screen">
+      <Header />
       <main className="pt-20">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-8">
@@ -54,7 +56,7 @@ const Office = () => {
         </div>
       </main>
       <Footer />
-    </PageWrapper>
+    </div>
   );
 };
 

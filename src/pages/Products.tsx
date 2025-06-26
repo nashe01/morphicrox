@@ -1,5 +1,6 @@
+
 import React from 'react';
-import PageWrapper from '../components/PageWrapper';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useContent } from '@/hooks/useContent';
 import { motion, Variants } from 'framer-motion';
@@ -82,7 +83,9 @@ const Products = () => {
   ];
 
   return (
-    <PageWrapper>
+    <div className="min-h-screen">
+      <Header />
+
       {/* Section pulled upward */}
       <main className="pt-12">
         <div className="max-w-7xl mx-auto px-6 py-16">
@@ -173,7 +176,7 @@ const Products = () => {
       </main>
 
       <Footer />
-    </PageWrapper>
+    </div>
   );
 };
 

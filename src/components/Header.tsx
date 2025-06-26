@@ -66,11 +66,7 @@ const mobileNavVariants = {
 };
 
 /* ─────────────────────────  Component  ───────────────────────── */
-interface HeaderProps {
-  onLoadComplete?: () => void;
-}
-
-const Header: React.FC<HeaderProps> = ({ onLoadComplete }) => {
+const Header: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, profile, signOut } = useAuth();
   const navigate = useNavigate();
@@ -101,23 +97,11 @@ const Header: React.FC<HeaderProps> = ({ onLoadComplete }) => {
     }
   };
 
-  const handleAnimationComplete = () => {
-    console.log('Header animation completed, calling onLoadComplete');
-    // Call onLoadComplete after header animation finishes
-    if (onLoadComplete) {
-      console.log('onLoadComplete function exists, calling it');
-      onLoadComplete();
-    } else {
-      console.log('onLoadComplete function is undefined');
-    }
-  };
-
   return (
     <motion.header
       initial="hidden"
       animate="show"
       variants={headerVariants}
-      onAnimationComplete={handleAnimationComplete}
       className="sticky top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">

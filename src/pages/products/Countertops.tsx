@@ -1,5 +1,6 @@
+
 import React from 'react';
-import PageWrapper from '../../components/PageWrapper';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 const Countertops = () => {
@@ -28,7 +29,8 @@ const Countertops = () => {
   ];
 
   return (
-    <PageWrapper>
+    <div className="min-h-screen">
+      <Header />
       <main className="pt-20">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center mb-16">
@@ -86,7 +88,7 @@ const Countertops = () => {
         </div>
       </main>
       <Footer />
-    </PageWrapper>
+    </div>
   );
 };
 
