@@ -10,6 +10,8 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [emailPlaceholder, setEmailPlaceholder] = useState('');
+  const [passwordPlaceholder, setPasswordPlaceholder] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +22,43 @@ const Auth = () => {
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Typewriter effect for placeholders
+  useEffect(() => {
+    const emailText = 'Email';
+    const passwordText = 'Password';
+    let emailIndex = 0;
+    let passwordIndex = 0;
+    let isEmailComplete = false;
+
+    const typeEmail = () => {
+      if (emailIndex < emailText.length) {
+        setEmailPlaceholder(emailText.slice(0, emailIndex + 1));
+        emailIndex++;
+        setTimeout(typeEmail, 100);
+      } else {
+        isEmailComplete = true;
+        setTimeout(typePassword, 500); // Wait 500ms before starting password
+      }
+    };
+
+    const typePassword = () => {
+      if (passwordIndex < passwordText.length) {
+        setPasswordPlaceholder(passwordText.slice(0, passwordIndex + 1));
+        passwordIndex++;
+        setTimeout(typePassword, 100);
+      }
+    };
+
+    // Start the typewriter effect
+    setTimeout(typeEmail, 1000); // Start after 1 second
+
+    // Cleanup function
+    return () => {
+      emailIndex = emailText.length;
+      passwordIndex = passwordText.length;
+    };
+  }, []);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +103,7 @@ const Auth = () => {
           <form onSubmit={handleSignIn} className="space-y-4 animate-fade-in">
             <Input
               type="email"
-              placeholder="Email"
+              placeholder={emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -72,7 +111,7 @@ const Auth = () => {
             />
             <Input
               type="password"
-              placeholder="Password"
+              placeholder={passwordPlaceholder}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
