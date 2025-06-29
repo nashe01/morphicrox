@@ -43,11 +43,9 @@ const AboutIntro: React.FC<Props> = ({ pauseOnHover = false }) => {
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   
   const allTexts = [
-    getContent('about_company_history', "With years of expertise in the industry, we specialize in providing high-quality bathroom furniture, kitchen solutions, office installations, and hospitality fixtures that combine functionality with aesthetic appeal. Our commitment to excellence has made us a trusted partner for architects, designers, and property developers across Southern Africa. We understand that every project is unique, which is why we offer bespoke solutions tailored to meet the specific requirements of each client."),
-    "Our team of skilled professionals works tirelessly to ensure that every product meets the highest standards of quality and design, delivering solutions that stand the test of time. From our master craftsmen who bring decades of experience to our innovative design team that stays ahead of industry trends, we combine traditional craftsmanship with modern technology. This fusion allows us to create products that are not only beautiful but also durable, functional, and environmentally responsible. We take pride in our attention to detail and our ability to transform spaces into stunning, practical environments that exceed expectations.",
-    "From concept to installation, we work closely with our clients to bring their vision to life with precision and creativity. Over the past decade we have expanded our manufacturing facility three times, adopting cutting-edge CNC technology and sustainable materials. In 2020 we launched our bespoke design studio, enabling fully customised solutions for luxury residential projects.",
-    "Strategic partnerships with leading hardware suppliers keep our product lines at the forefront of innovation. A dedicated after-sales support team ensures seamless maintenance and long-term customer satisfaction. Today, we proudly serve clients across Southern Africa, supplying premium fixtures to hotels, corporate offices, and private homes.",
-    "Our commitment to eco-friendly practices guides every decision, from sourcing FSC-certified timber to optimising energy use in our workshops.",
+    getContent('about_company_history', "With years of expertise in the industry, we specialize in providing high-quality bathroom furniture, kitchen solutions, office installations, and hospitality fixtures that combine functionality with aesthetic appeal. Our commitment to excellence has made us a trusted partner for architects, designers, and property developers across Southern Africa. We understand that every project is unique, which is why we offer bespoke solutions tailored to meet the specific requirements of each client. From our master craftsmen who bring decades of experience to our innovative design team that stays ahead of industry trends, we combine traditional craftsmanship with modern technology."),
+    "Our team of skilled professionals works tirelessly to ensure that every product meets the highest standards of quality and design, delivering solutions that stand the test of time. This fusion allows us to create products that are not only beautiful but also durable, functional, and environmentally responsible. We take pride in our attention to detail and our ability to transform spaces into stunning, practical environments that exceed expectations. From concept to installation, we work closely with our clients to bring their vision to life with precision and creativity.",
+    "Over the past decade we have expanded our manufacturing facility three times, adopting cutting-edge CNC technology and sustainable materials. In 2020 we launched our bespoke design studio, enabling fully customised solutions for luxury residential projects. Strategic partnerships with leading hardware suppliers keep our product lines at the forefront of innovation. A dedicated after-sales support team ensures seamless maintenance and long-term customer satisfaction. Today, we proudly serve clients across Southern Africa, supplying premium fixtures to hotels, corporate offices, and private homes. Our commitment to eco-friendly practices guides every decision, from sourcing FSC-certified timber to optimising energy use in our workshops."
   ];
 
   useEffect(() => {
@@ -97,7 +95,7 @@ const AboutIntro: React.FC<Props> = ({ pauseOnHover = false }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ amount: 0.3, once: true }}
-          className="space-y-8"
+          className="space-y-0"
         >
           {/* Top Row - Image and Initial Content */}
           <motion.div variants={columnVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
