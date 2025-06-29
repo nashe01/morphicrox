@@ -90,10 +90,13 @@ const Header: React.FC = () => {
 
   const handleSignOut = async () => {
     try {
+      console.log('Header logout initiated');
       await signOut();
-      navigate("/");
+      // The signOut function will handle the redirect
     } catch (error) {
       console.error('Sign out error:', error);
+      // Fallback redirect
+      navigate("/");
     }
   };
 

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -6,6 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AdminHeader from '@/components/admin/AdminHeader';
 import ContentManager from '@/components/admin/ContentManager';
 import ProjectsManager from '@/components/admin/ProjectsManager';
+import PageManager from '@/components/admin/PageManager';
+import MediaManager from '@/components/admin/MediaManager';
+import VideoManager from '@/components/admin/VideoManager';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 interface SiteContent {
@@ -34,7 +36,7 @@ const Admin = () => {
   const [projects, setProjects] = useState<GalleryProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
-  const [activeTab, setActiveTab] = useState('content');
+  const [activeTab, setActiveTab] = useState('home');
 
   useEffect(() => {
     if (isAuthorized && authCheckComplete) {
@@ -241,35 +243,40 @@ const Admin = () => {
         )}
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList>
-            <TabsTrigger value="content">Site Content</TabsTrigger>
-            <TabsTrigger value="projects">Gallery Projects</TabsTrigger>
-            <TabsTrigger value="videos">Gallery Videos</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="home">Home</TabsTrigger>
+            <TabsTrigger value="about">About</TabsTrigger>
+            <TabsTrigger value="gallery">Gallery</TabsTrigger>
+            <TabsTrigger value="products">Products</TabsTrigger>
+            <TabsTrigger value="contact">Contact</TabsTrigger>
+            <TabsTrigger value="media">Media</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="content">
-            <ContentManager
-              content={content}
-              onUpdateContent={updateContent}
-              onContentChange={handleContentChange}
-            />
+          <TabsContent value="home">
+            <PageManager pageName="home" pageTitle="Home Page" />
           </TabsContent>
 
-          <TabsContent value="projects">
-            <ProjectsManager
-              projects={projects}
-              onUpdateProject={updateProject}
-              onAddProject={addProject}
-              onDeleteProject={deleteProject}
-              onProjectChange={handleProjectChange}
-            />
+          <TabsContent value="about">
+            <PageManager pageName="about" pageTitle="About Page" />
           </TabsContent>
 
-          <TabsContent value="videos">
-            <div className="text-center py-12">
-              <h3 className="text-lg font-semibold mb-2">Video Management</h3>
-              <p className="text-gray-600">Video management interface coming soon...</p>
+          <TabsContent value="gallery">
+            <div className="space-y-6">
+              <PageManager pageName="gallery" pageTitle="Gallery Page" />
+              <VideoManager />
             </div>
+          </TabsContent>
+
+          <TabsContent value="products">
+            <PageManager pageName="products" pageTitle="Products Page" />
+          </TabsContent>
+
+          <TabsContent value="contact">
+            <PageManager pageName="contact" pageTitle="Contact Page" />
+          </TabsContent>
+
+          <TabsContent value="media">
+            <MediaManager />
           </TabsContent>
         </Tabs>
       </div>
