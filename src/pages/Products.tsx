@@ -1,7 +1,7 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ProductsHero from '../components/ProductsHero';
 import { useContent } from '@/hooks/useContent';
 import { motion, Variants } from 'framer-motion';
 
@@ -85,53 +85,59 @@ const Products = () => {
   return (
     <div className="min-h-screen">
       <Header />
+      
+      {/* Hero Section */}
+      <ProductsHero />
 
-      {/* Section pulled upward */}
-      <main className="pt-12">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          {/* ── Intro (fade-up) ────────────────────────────────────────── */}
+      {/* Product Categories Section */}
+      <main className="bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          {/* Section Title */}
           <motion.div
             variants={introFadeUp}
             initial="hidden"
-            animate="show"
-            className="text-center mb-12"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-light text-black mb-4">
-              Our <span className="font-bold text-brand">Products</span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-light text-black mb-4">
+              Explore Our <span className="font-bold text-brand">Product Range</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               {getContent(
-                'products_description',
-                'Discover our comprehensive range of premium ceramic products designed for residential, commercial, and hospitality applications. Each product is crafted with attention to detail and built to last.'
+                'categories_description',
+                'Browse through our comprehensive collection of premium ceramic products. Each category offers a wide selection of styles, sizes, and finishes to meet your specific needs.'
               )}
             </p>
           </motion.div>
 
-          {/* ── Product cards (staggered) ─────────────────────────────── */}
+          {/* Product cards (staggered) */}
           <motion.div
             variants={gridStagger}
             initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20"
           >
             {productCategories.map((cat, i) => (
               <motion.div
                 key={i}
                 variants={cardFade}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
               >
                 <img
                   src={cat.image}
                   alt={cat.title}
                   className="w-full h-48 object-cover"
                 />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2 text-black">{cat.title}</h3>
-                  <p className="text-sm text-gray-600 mb-3">{cat.description}</p>
-                  <ul className="space-y-1">
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-3 text-black">{cat.title}</h3>
+                  <p className="text-gray-600 mb-4 leading-relaxed">{cat.description}</p>
+                  <ul className="space-y-2">
                     {cat.features.map((feat, idx) => (
-                      <li key={idx} className="text-xs text-brand">
-                        • {feat}
+                      <li key={idx} className="text-sm text-brand flex items-center">
+                        <span className="w-1.5 h-1.5 bg-brand rounded-full mr-2"></span>
+                        {feat}
                       </li>
                     ))}
                   </ul>
@@ -140,38 +146,56 @@ const Products = () => {
             ))}
           </motion.div>
 
-          {/* ── Why choose us (static) ───────────────────────────────── */}
-          <div className="bg-gray-50 p-8 rounded-lg mb-16">
-            <h2 className="text-3xl font-light text-black mb-6 text-center">
+          {/* Why choose us section */}
+          <motion.div 
+            variants={introFadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-gray-50 to-gray-100 p-12 rounded-2xl"
+          >
+            <h2 className="text-3xl font-light text-black mb-8 text-center">
               Why Choose Our Products?
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
+                <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">✨</span>
+                </div>
                 <h3 className="text-lg font-semibold mb-3 text-brand">Premium Quality</h3>
                 <p className="text-gray-600">
                   Every piece is crafted from the finest ceramic materials with attention to detail.
                 </p>
               </div>
               <div className="text-center">
+                <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🛡️</span>
+                </div>
                 <h3 className="text-lg font-semibold mb-3 text-brand">Durability</h3>
                 <p className="text-gray-600">
                   Our products are built to withstand daily use and maintain their beauty over time.
                 </p>
               </div>
               <div className="text-center">
+                <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🎨</span>
+                </div>
                 <h3 className="text-lg font-semibold mb-3 text-brand">Design Variety</h3>
                 <p className="text-gray-600">
                   Choose from a wide range of styles, sizes, and finishes to match any design vision.
                 </p>
               </div>
               <div className="text-center">
+                <div className="w-16 h-16 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">👨‍💼</span>
+                </div>
                 <h3 className="text-lg font-semibold mb-3 text-brand">Expert Support</h3>
                 <p className="text-gray-600">
                   Professional consultation and installation support for every project.
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </main>
 
