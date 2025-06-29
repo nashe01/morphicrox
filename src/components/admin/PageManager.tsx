@@ -32,14 +32,16 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
   const [saving, setSaving] = useState(false);
   const [editingKey, setEditingKey] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
+  const [showDebug, setShowDebug] = useState(false);
   const { toast } = useToast();
 
   // Group content by section
   const contentBySection = content.reduce((acc, item) => {
-    if (!acc[item.section]) {
-      acc[item.section] = [];
+    const section = item.section || 'general';
+    if (!acc[section]) {
+      acc[section] = [];
     }
-    acc[item.section].push(item);
+    acc[section].push(item);
     return acc;
   }, {} as Record<string, PageContent[]>);
 
@@ -50,6 +52,7 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
   const loadPageContent = async () => {
     try {
       setLoading(true);
+      console.log('Loading content for page:', pageName);
       
       // Load content from site_content table
       const { data: contentData, error: contentError } = await supabase
@@ -58,7 +61,12 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
         .eq('page', pageName)
         .order('section');
 
-      if (contentError) throw contentError;
+      if (contentError) {
+        console.error('Content error:', contentError);
+        throw contentError;
+      }
+      
+      console.log('Loaded content:', contentData);
       setContent(contentData || []);
 
     } catch (error) {
@@ -76,13 +84,20 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
   const saveContent = async (id: string, value: string) => {
     try {
       setSaving(true);
+      console.log('Saving content:', { id, value });
       
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('site_content')
         .update({ value })
-        .eq('id', id);
+        .eq('id', id)
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Save error:', error);
+        throw error;
+      }
+
+      console.log('Save response:', data);
 
       // Update local state
       setContent(prev => prev.map(item => 
@@ -99,7 +114,7 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
       console.error('Error saving content:', error);
       toast({
         title: 'Error',
-        description: 'Failed to save content',
+        description: `Failed to save content: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: 'destructive',
       });
     } finally {
@@ -134,19 +149,27 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
     const value = prompt('Enter content value:');
 
     try {
-      const { error } = await supabase
+      console.log('Adding new content:', { key, page: pageName, section, title, description, value });
+      
+      const { data, error } = await supabase
         .from('site_content')
         .insert({
           key,
           page: pageName,
-          section,
+          section: section as any, // Cast to enum type
           type: 'text',
           title,
           description,
           value: value || ''
-        });
+        })
+        .select();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Insert error:', error);
+        throw error;
+      }
+
+      console.log('Insert response:', data);
 
       toast({
         title: 'Success',
@@ -159,9 +182,36 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
       console.error('Error adding content:', error);
       toast({
         title: 'Error',
-        description: 'Failed to add new content',
+        description: `Failed to add new content: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: 'destructive',
       });
+    }
+  };
+
+  const testDatabaseConnection = async () => {
+    try {
+      console.log('Testing database connection...');
+      const { data, error } = await supabase
+        .from('site_content')
+        .select('count')
+        .limit(1);
+      
+      if (error) {
+        console.error('Database connection error:', error);
+        toast({
+          title: 'Database Error',
+          description: `Connection failed: ${error.message}`,
+          variant: 'destructive',
+        });
+      } else {
+        console.log('Database connection successful');
+        toast({
+          title: 'Success',
+          description: 'Database connection working',
+        });
+      }
+    } catch (error) {
+      console.error('Test error:', error);
     }
   };
 
@@ -177,8 +227,43 @@ export default function PageManager({ pageName, pageTitle }: PageManagerProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">{pageTitle} Management</h2>
-        <Badge variant="secondary">{pageName}</Badge>
+        <div className="flex gap-2">
+          <Badge variant="secondary">{pageName}</Badge>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => setShowDebug(!showDebug)}
+          >
+            {showDebug ? 'Hide' : 'Show'} Debug
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={testDatabaseConnection}
+          >
+            Test DB
+          </Button>
+        </div>
       </div>
+
+      {showDebug && (
+        <Card className="bg-yellow-50 border-yellow-200">
+          <CardHeader>
+            <CardTitle className="text-yellow-800">Debug Information</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2 text-sm">
+              <div><strong>Page:</strong> {pageName}</div>
+              <div><strong>Content Count:</strong> {content.length}</div>
+              <div><strong>Sections:</strong> {Object.keys(contentBySection).join(', ')}</div>
+              <div><strong>Raw Content:</strong></div>
+              <pre className="bg-white p-2 rounded text-xs overflow-auto max-h-40">
+                {JSON.stringify(content, null, 2)}
+              </pre>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Tabs defaultValue="content" className="w-full">
         <TabsList className="grid w-full grid-cols-1">
