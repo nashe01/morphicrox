@@ -125,8 +125,8 @@ const AboutIntro: React.FC<Props> = ({ pauseOnHover = false }) => {
             </div>
 
             {/* Right Column - Image */}
-            <div className="relative lg:pl-0 h-[500px]">
-              <div className="bg-white rounded-lg p-4 shadow-lg border-2 border-[#DC8C34] h-full">
+            <div className="relative lg:pl-0 h-[480px] flex flex-col justify-end">
+              <div className="bg-white rounded-lg p-4 shadow-lg border-2 border-[#DC8C34] h-full flex flex-col justify-end mt-6">
                 <img
                   src="/images/stuff.png"
                   alt="Our Workshop"
