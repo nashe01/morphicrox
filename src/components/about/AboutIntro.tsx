@@ -126,11 +126,13 @@ const AboutIntro: React.FC<Props> = ({ pauseOnHover = false }) => {
 
             {/* Right Column - Image */}
             <div className="relative lg:pl-0 h-[500px]">
-              <img
-                src="/images/stuff.png"
-                alt="Our Workshop"
-                className="w-full h-full object-contain rounded-lg"
-              />
+              <div className="bg-white rounded-lg p-4 shadow-lg border-2 border-[#DC8C34] h-full">
+                <img
+                  src="/images/stuff.png"
+                  alt="Our Workshop"
+                  className="w-full h-full object-contain rounded-lg"
+                />
+              </div>
             </div>
           </motion.div>
 
