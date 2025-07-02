@@ -1,5 +1,5 @@
 // src/components/VideoHero.tsx
-import React from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -48,6 +48,32 @@ const VideoHero: React.FC = () => {
     triggerOnce: true,
   });
 
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const rewindInterval = useRef<NodeJS.Timeout | null>(null);
+
+  const handleVideoEnd = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    // Start rewinding
+    if (rewindInterval.current) clearInterval(rewindInterval.current);
+    rewindInterval.current = setInterval(() => {
+      if (!video) return;
+      if (video.currentTime <= 0.05) {
+        video.currentTime = 0;
+        clearInterval(rewindInterval.current!);
+        video.pause();
+      } else {
+        video.currentTime = Math.max(0, video.currentTime - 0.03); // Slow rewind
+      }
+    }, 30); // ~33fps
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (rewindInterval.current) clearInterval(rewindInterval.current);
+    };
+  }, []);
+
   // Hardcoded hero content
   const heroTitle = "Engineered";
   const heroSubtitle = "Perfection";
@@ -65,12 +91,13 @@ const VideoHero: React.FC = () => {
       {/* Background video ------------------------------------------------ */}
       <div className="absolute inset-0">
         <video
+          ref={videoRef}
           src="/images/hero.mp4"
           autoPlay
-          loop
           muted
           playsInline
           className="w-full h-full object-cover"
+          onEnded={handleVideoEnd}
         />
       </div>
       <div className="absolute inset-0 bg-black/30" />
