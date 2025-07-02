@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion, Variants, cubicBezier } from "framer-motion";
 import { useContent } from "@/hooks/useContent";
@@ -30,14 +31,6 @@ const paraVariants: Variants = {
   },
 };
 
-const curtainVariants: Variants = {
-  hidden: { y: '100%' },
-  show: {
-    y: '0%',
-    transition: { duration: 1, ease, delay: 1.4 }, // after hero bg
-  },
-};
-
 const AboutHero: React.FC = () => {
   const { getContent } = useContent('about');
 
@@ -51,7 +44,7 @@ const AboutHero: React.FC = () => {
       viewport={{ amount: 0.3, once: true }}
     >
       {/* Background */}
-      <div className="relative h-screen w-full">
+      <div className="relative h-[50vh] md:h-[60vh] w-full">
         <img
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
           alt="About MorphicRox"
@@ -59,15 +52,6 @@ const AboutHero: React.FC = () => {
         />
         <div className="absolute inset-0 bg-black/40" />
       </div>
-
-      {/* Curtain Animation */}
-      <motion.div
-        variants={curtainVariants}
-        initial="hidden"
-        animate="show"
-        className="absolute left-0 bottom-0 w-full h-[18vh] md:h-[15vh] bg-white z-20 rounded-t-3xl shadow-lg"
-        style={{ borderTop: '4px solid #DC8C34' }}
-      />
 
       {/* Text Area */}
       <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col md:flex-row gap-12 -mt-10 md:-mt-16 relative z-10">
