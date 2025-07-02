@@ -62,11 +62,14 @@ const VideoHero: React.FC = () => {
       initial="hidden"
       animate={heroInView ? "visible" : "hidden"}
     >
-      {/* Background image ------------------------------------------------ */}
+      {/* Background video ------------------------------------------------ */}
       <div className="absolute inset-0">
-        <img
-          src="/hero.jpg"
-          alt="Modern ceramic fittings"
+        <video
+          src="/images/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
         />
       </div>
