@@ -57,7 +57,7 @@ const FeaturesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <motion.div variants={cardVariants} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-black mb-4 font-pin-sans">
-            {getContent('features_why_choose_title', 'Why Choose')} <span className="font-bold text-brand">MorphicRox</span>
+            {getContent('features_why_choose_title',)} <span className="font-bold text-brand">MorphicRox</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Experience the difference with our commitment to excellence and customer satisfaction

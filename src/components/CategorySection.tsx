@@ -98,7 +98,7 @@ const CategorySection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <motion.div variants={cardVariants} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
-            Our <span className="font-bold">Collections</span>
+            <span className="text-[#DC8C34]">Our</span> <span className="text-black">Collection</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             {getContentByKey(content, 'collections_description', 'Discover our comprehensive range of bathroom solutions designed to elevate your space')}
