@@ -3,7 +3,6 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { usePageContent, getContentByKey } from "@/hooks/usePageContent";
 
 /* ------------------------------------------------------------------ */
 /*  1. Data                                                            */
@@ -43,26 +42,16 @@ const fadeUpCards = {
 /* ------------------------------------------------------------------ */
 
 const VideoHero: React.FC = () => {
-  const { content, loading } = usePageContent("home");
-  
   // Only trigger once, then stop observing
   const { ref: heroRef, inView: heroInView } = useInView({
     threshold: 0.2,
     triggerOnce: true,
   });
 
-  // Get content from database
-  const heroTitle = getContentByKey(content, "hero_title", "Engineered");
-  const heroSubtitle = getContentByKey(content, "hero_subtitle", "Perfection");
-  const heroDescription = getContentByKey(content, "hero_description", "Transform your spaces with premium ceramic solutions crafted for bathrooms, kitchens, offices, and hospitality");
-
-  if (loading) {
-    return (
-      <div className="relative h-[90vh] overflow-hidden bg-gray-900 flex items-center justify-center">
-        <div className="text-white text-lg">Loading...</div>
-      </div>
-    );
-  }
+  // Hardcoded hero content
+  const heroTitle = "Engineered";
+  const heroSubtitle = "Perfection";
+  const heroDescription = "Transform your spaces with premium ceramic solutions crafted for bathrooms, kitchens, offices, and hospitality";
 
   return (
     <motion.section
@@ -76,7 +65,7 @@ const VideoHero: React.FC = () => {
       {/* Background image ------------------------------------------------ */}
       <div className="absolute inset-0">
         <img
-          src="/lovable-uploads/aa70e3f3-87b5-47e3-add9-56b3854b6698.png"
+          src="/hero.jpg"
           alt="Modern ceramic fittings"
           className="w-full h-full object-cover"
         />
@@ -103,8 +92,8 @@ const VideoHero: React.FC = () => {
       <div className="absolute bottom-0 left-0 right-0 z-10 overflow-visible">
         <div className="grid grid-cols-4 h-36 divide-x divide-white/25 border-x border-white/25 relative z-0">
           {categories.map((cat) => {
-            const categoryTitle = getContentByKey(content, cat.key, cat.label);
-            const categoryDescription = getContentByKey(content, `${cat.key.replace('_title', '_description')}`, '');
+            const categoryTitle = cat.label;
+            const categoryDescription = '';
             
             return (
               <motion.a
