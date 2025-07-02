@@ -88,7 +88,8 @@ const CategorySection: React.FC = () => {
       className="py-20 bg-gray-50"
       variants={containerVariants}
       initial="hidden"
-      animate="show"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
     >
       <div className="max-w-7xl mx-auto px-6">
         <motion.div variants={cardVariants} className="text-center mb-16">

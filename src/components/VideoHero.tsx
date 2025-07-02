@@ -79,7 +79,8 @@ const VideoHero: React.FC = () => {
       className="relative h-[90vh] overflow-hidden"
       variants={heroFadeUp}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.25 }}
     >
       {/* Background video ------------------------------------------------ */}
       <div className="absolute inset-0">

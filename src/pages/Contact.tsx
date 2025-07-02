@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -35,15 +34,16 @@ const Contact = () => (
 
     {/* ───────── Hero ───────── */}
     <section
-      className="relative h-72 md:h-96 bg-cover bg-center"
-      style={{ backgroundImage: "url('/src/assets/contact-hero.jpg')" }}
+      className="relative h-[75vh] bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/bathroom4.jpg')" }}
     >
       <span className="absolute inset-0 bg-black/60" />
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-        <h1 className="text-4xl md:text-5xl font-bold">Contact us</h1>
-        <p className="mt-4 max-w-xl font-light">
-          Kassapay is ready to provide the right solution according to your
-          needs
+        <h1 className="text-4xl md:text-5xl font-bold">
+          <span style={{ color: '#D06518' }}>Contact</span> <span className="text-black">us</span>
+        </h1>
+        <p className="mt-4 max-w-xl font-light text-lg md:text-xl">
+          We're here to help you with all your bathroom and interior needs. Reach out to our team for expert advice, product information, or to schedule a consultation. Your dream space is just a message away—contact us today!
         </p>
       </div>
     </section>
@@ -58,7 +58,7 @@ const Contact = () => (
       <div className="max-w-4xl mx-auto -mt-24 bg-white rounded-2xl shadow-xl px-6 py-8 md:px-10 md:py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* left – info */}
         <div>
-          <h2 className="text-2xl font-bold text-black mb-4">Get in touch</h2>
+          <h2 className="text-2xl font-bold mb-4" style={{ color: '#D06518' }}>Get in touch</h2>
           <p className="text-gray-500 mb-8">
             Sociology viverra lectus placerat sem efficitur molestie vehicula
             cubilia leo etiam nam.
@@ -126,9 +126,7 @@ const Contact = () => (
 
         {/* right – form */}
         <div>
-          <h2 className="text-2xl font-bold text-black mb-6">
-            Send us a message
-          </h2>
+          <h2 className="text-2xl font-bold mb-6" style={{ color: '#D06518' }}>Send us a message</h2>
           <form
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
             onSubmit={(e) => e.preventDefault()}
@@ -185,9 +183,7 @@ const Contact = () => (
     {/* ───────── Map ───────── */}
     <section className="max-w-6xl mx-auto mt-16 px-6 pb-16">
       <div className="bg-gray-50 p-8 rounded-xl">
-        <h2 className="text-3xl font-light text-black mb-6">
-          Visit Our Showroom
-        </h2>
+        <h2 className="text-3xl font-light mb-6" style={{ color: '#D06518' }}>Visit Our Showroom</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div>
             <p className="text-gray-600 mb-4">

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Award, Truck, Shield, Users } from "lucide-react";
 import { motion, Variants, cubicBezier } from "framer-motion";
@@ -51,7 +50,8 @@ const FeaturesSection: React.FC = () => {
       className="py-20 bg-white"
       variants={containerVariants}
       initial="hidden"
-      animate="show"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
     >
       <div className="max-w-7xl mx-auto px-6">
         <motion.div variants={cardVariants} className="text-center mb-16">

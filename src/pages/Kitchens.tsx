@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,19 +7,19 @@ const Kitchens = () => {
     {
       title: "Countertops",
       description: "Durable ceramic surfaces for modern kitchens that resist heat, stains, and scratches. Available in various colors and patterns to match any design aesthetic.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
+      image: "/images/countertops1.jpg",
       features: ["Heat resistant up to 500°F", "Non-porous surface", "20+ color options"]
     },
     {
       title: "Kitchen Sinks",
       description: "Functional and stylish ceramic sink solutions designed for heavy daily use. From farmhouse to undermount styles, each sink combines beauty with practicality.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
+      image: "/images/sink4.jpeg",
       features: ["Sound dampening technology", "Scratch resistant coating", "Multiple configuration options"]
     },
     {
       title: "Backsplashes",
       description: "Decorative ceramic tiles for kitchen walls that protect against splashes while adding visual interest. Choose from classic subway tiles to modern geometric patterns.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
+      image: "/images/backsplash1.jpg",
       features: ["Easy to clean surface", "Moisture resistant", "Custom pattern options"]
     }
   ];
@@ -55,9 +54,7 @@ const Kitchens = () => {
                       <li key={idx} className="text-sm text-brand">• {feature}</li>
                     ))}
                   </ul>
-                  <button className="w-full bg-brand text-white py-2 px-4 rounded-md hover:bg-brand/90 transition-colors">
-                    Learn More
-                  </button>
+                 
                 </div>
               </div>
             ))}
@@ -119,8 +116,8 @@ const Kitchens = () => {
             </div>
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80" 
-                alt="Modern Kitchen" 
+                src="/images/kitchen1.jpeg"
+                alt="Modern Kitchen"
                 className="w-full h-96 object-cover rounded-lg shadow-lg"
               />
             </div>

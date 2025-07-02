@@ -67,7 +67,8 @@ const Bathrooms = () => {
           className="max-w-7xl mx-auto px-6 py-16"
           variants={containerVariants}
           initial="hidden"
-          animate="show"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.25 }}
         >
           <motion.div variants={textVariants} className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-light text-black mb-4 font-pin-sans">

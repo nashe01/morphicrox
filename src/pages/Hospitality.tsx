@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -19,8 +18,8 @@ const Hospitality = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" 
-                alt="Hotel Bathrooms" 
+                src="/images/spar1.jpeg"
+                alt="Hotel Bathrooms"
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
@@ -31,8 +30,8 @@ const Hospitality = () => {
             
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" 
-                alt="Restaurant Facilities" 
+                src="/images/spar2.jpeg"
+                alt="Restaurant Facilities"
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
@@ -43,8 +42,8 @@ const Hospitality = () => {
             
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
               <img 
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" 
-                alt="Spa & Wellness" 
+                src="/images/bathroom1.jpg"
+                alt="Spa & Wellness"
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
