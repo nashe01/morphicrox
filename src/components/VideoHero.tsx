@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, easeOut } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 
 /* ------------------------------------------------------------------ */
 /*  1. Data                                                            */
@@ -42,11 +41,6 @@ const fadeUpCards = {
 /* ------------------------------------------------------------------ */
 
 const VideoHero: React.FC = () => {
-  // Only trigger once, then stop observing
-  const { ref: heroRef, inView: heroInView } = useInView({
-    threshold: 0.2,
-    triggerOnce: true,
-  });
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const rewindInterval = useRef<NodeJS.Timeout | null>(null);
@@ -81,12 +75,11 @@ const VideoHero: React.FC = () => {
 
   return (
     <motion.section
-      ref={heroRef}
       id="hero-section"
       className="relative h-[90vh] overflow-hidden"
       variants={heroFadeUp}
       initial="hidden"
-      animate={heroInView ? "visible" : "hidden"}
+      animate="visible"
     >
       {/* Background video ------------------------------------------------ */}
       <div className="absolute inset-0">
@@ -132,7 +125,7 @@ const VideoHero: React.FC = () => {
                 className="group relative overflow-visible backdrop-blur-sm flex items-end p-6 pb-10 bg-white/10 hover:bg-white/20"
                 variants={fadeUpCards}
                 initial="hidden"
-                animate={heroInView ? "visible" : "hidden"}
+                animate="visible"
                 whileHover={{
                   scale: 1.08,
                   y: -4,

@@ -15,32 +15,28 @@ const categories: Category[] = [
   {
     title: "Bathroom Furniture",
     description: "Premium vanities, cabinets, and storage solutions",
-    image:
-      "https://images.unsplash.com/photo-1584622781867-4d8147619355?auto=format&fit=crop&w=800&q=80",
+    image: "/images/bathroom1.jpg",
     color: "from-amber-500 to-orange-600",
     key: "bathroom_category_title"
   },
   {
     title: "Ceramics & Fixtures",
     description: "Elegant basins, toilets, and ceramic accessories",
-    image:
-      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80",
+    image: "/images/hospitality3.jpeg",
     color: "from-blue-500 to-teal-600",
     key: "kitchen_category_title"
   },
   {
     title: "Luxury Collections",
     description: "Curated sets for complete bathroom transformation",
-    image:
-      "https://images.unsplash.com/photo-1584622662821-6d4c7ea37027?auto=format&fit=crop&w=800&q=80",
+    image: "/images/spar1.jpeg",
     color: "from-purple-500 to-pink-600",
     key: "hospitality_category_title"
   },
   {
     title: "Custom Solutions",
     description: "Bespoke designs tailored to your space",
-    image:
-      "https://images.unsplash.com/photo-1584622831365-4136e2a05ffe?auto=format&fit=crop&w=800&q=80",
+    image: "/images/spar2.jpeg",
     color: "from-green-500 to-emerald-600",
     key: "office_category_title"
   },
@@ -92,8 +88,7 @@ const CategorySection: React.FC = () => {
       className="py-20 bg-gray-50"
       variants={containerVariants}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
+      animate="show"
     >
       <div className="max-w-7xl mx-auto px-6">
         <motion.div variants={cardVariants} className="text-center mb-16">

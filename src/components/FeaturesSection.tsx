@@ -51,8 +51,7 @@ const FeaturesSection: React.FC = () => {
       className="py-20 bg-white"
       variants={containerVariants}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.25 }}
+      animate="show"
     >
       <div className="max-w-7xl mx-auto px-6">
         <motion.div variants={cardVariants} className="text-center mb-16">
