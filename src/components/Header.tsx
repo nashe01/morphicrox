@@ -112,7 +112,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <motion.img
             variants={groupVariants}
-            src="/lovable-uploads/e452e626-2fe4-4654-88a8-e17455eb772b.png"
+            src="/lovable-uploads/logo.png"
             alt="MorphicRox Logo"
             className="h-12 w-auto cursor-pointer"
             onClick={() => navigate("/")}
