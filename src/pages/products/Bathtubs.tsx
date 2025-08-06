@@ -79,7 +79,7 @@ const Bathtubs = () => {
                 <p className="text-gray-600 mb-4">Non-porous surface makes cleaning effortless while preventing bacteria and mold growth.</p>
                 
                 <h3 className="text-xl font-semibold mb-3 text-brand">Custom Options</h3>
-                <p className="text-gray-600">Available in various sizes and configurations to fit your specific bathroom layout and design preferences.</p>
+                <p className="text-gray-600">Available in various sizes and configurations to fit your specific bathroom layout and design preferences</p>
               </div>
             </div>
           </div>
