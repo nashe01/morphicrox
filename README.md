@@ -1,5 +1,16 @@
 # Porcelain Motion Showcase
 
+[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5.3-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4.1-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.11-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-2.50.0-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.19.1-0055FF?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
+
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-9+-CB3837?style=for-the-badge&logo=npm)](https://www.npmjs.com/)
+
 A modern, responsive website showcasing porcelain and bathroom fixtures with stunning motion effects and an integrated admin panel for content management.
 
 ## 🏠 Overview
